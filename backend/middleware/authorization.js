@@ -1,0 +1,13 @@
+// check if the user has a permission
+
+const authorization = (text) => {
+  return (req, res, next) => {
+    if (req.token.role.permissions.includes(text)) {
+      next();
+    } else {
+      res.status(403).json({ success: false, massage: "Unauthorized" });
+    }
+  };
+};
+
+module.exports = authorization;
