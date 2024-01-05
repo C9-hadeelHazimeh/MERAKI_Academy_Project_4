@@ -5,7 +5,7 @@ const authorization = (text) => {
     if (req.token.role.permissions.includes(text)) {
       next();
     } else {
-      res.status(403).json({ success: false, massage: "Unauthorized" });
+      res.status(403).json({success: false, massage: `Unauthorized`});
     }
   };
 };

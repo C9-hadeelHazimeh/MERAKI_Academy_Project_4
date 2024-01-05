@@ -4,7 +4,11 @@ const jwt = require("jsonwebtoken");
 
 // This function creates a new user (doctor or patient)
 //register
-const register=(req, res)=>{}
+const register=(req, res)=>{
+
+
+  
+}
 
 
 //login function checks user login credentials

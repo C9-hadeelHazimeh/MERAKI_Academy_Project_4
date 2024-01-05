@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+
 //check if the user is logged in 
 const authentication = (req, res, next) => {
 
@@ -12,11 +13,11 @@ const authentication = (req, res, next) => {
     } catch {
       res
         .status(403)
-        .json({ success: false, message: "The token is invalid or expired" });
+        .json({success: false, message: `The token is invalid or expired`});
     }
     //Forbidden
   } else {
-    res.status(403).json({ success: false, message: "Forbidden" });
+    res.status(403).json({success: false, message: `Forbidden`});
   }
 };
 
