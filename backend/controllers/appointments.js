@@ -1,50 +1,81 @@
 const appointment = require("../models/appointment");
 const appointmentsModel = require("../models/appointment");
-const scheduleSModel=require("../models/schedule");
+const scheduleModel=require("../models/schedule");
+// process.env.DB_URI.appointments.getIndexes()
 
- const getAllAppointment=()=>{
-const newAppointment= new appointmentsModel({patient,doctor,date,clinic,isBooked:true});
-
- }
-const bookAppointment=(req,res)=>{
-const {patient,doctor,date,clinic}=req.body;
-// const specificDate = new Date('2024-01-06T12:00:00Z');
-const newAppointment= new appointmentsModel({patient,doctor,date,clinic,isBooked:true});
-
-const check= appointmentsModel.find({isBooked:false});// if true the appointment is available
- console.log("check:",check);
-
-//check if the appointemnt is reserved 
-if (!check){
-    return res.status(409).json({
-        success: false,
-        message: "The appointment has been already reserved,please choose anthor time",
-    });
-}
-
-newAppointment.save()
-.then((result) => {
+const schedule=((req,res)=>{
+const {doctor,date,clinic}=req.body;
+const newAppointment= new scheduleModel({doctor,date,clinic,isBooked:true});
+ newAppointment.save().then((result)=>{
     res.status(201).json({
-      success: true,
-      message: "Appointment is booked Successfully",
-      appointment: result,
-      //isbooked=true
-    });
-
-  })
-  .catch((err) => {
+        success: true,
+        message: "Appointment is booked Successfully",
+        appointment: result,
+       })
+       console.log(result)
+      }).catch((err)=>{
     res.status(500).json({
-      success: false,
-      message: `Server Error`,
-      Error: err.message,
-    });
-  });
+        success: false,
+        message: `Server Error`,
+        Error: err.message,
+      });
+ })
+
+})
 
 
+const getAllAppointment=(async(req,res)=>{
 
+   try {
+    //const newAppointment= new scheduleModel({doctor,date,clinic,isBooked:true});
+    const checkBooking= await appointmentsModel.find({isBooked:false}).populate("schedule");
 
-}
+    if (!checkBooking.length) {
+        res.status(200).json({
+          success: true,
+          message: `All appointments`,
+         sechdule: checkBooking,
+        });
+      } else {
+        res.status(200).json({
+          success: false,
+          message: `No appointments Yet`,
+        });
+      }
+        }catch{
+        res.status(500).json({
+            success: false,
+            message: `Server Error`,
+            Error: err.message,
+          });
+
+    }
+   
+})
+
+//in this function the patient can book from the schedule 
+const bookAppointment=((req,res)=>{
+ const {patient,schedule}=req.body;
+ const newAppointment= new appointmentsModel({patient,schedule});
+ newAppointment.save().then((result)=>{
+    res.status(201).json({
+        success: true,
+        message: "Appointment is booked Successfully",
+        appointment: result,
+       })
+       console.log(result)
+      }).catch((err)=>{
+    res.status(500).json({
+        success: false,
+        message: `Server Error`,
+        Error: err.message,
+      });
+ })
+
+})
  
 module.exports={
 bookAppointment,
+schedule,
+getAllAppointment
 }

@@ -84,7 +84,7 @@ const login = (req, res) => {
           role: result.role,
           
         };
-        const options = { expiresIn: "60m" };
+        const options = { expiresIn: "5h" };
         const token = jwt.sign(payLoad, process.env.SECRET, options);
         res.status(201).json({
           success: true,
