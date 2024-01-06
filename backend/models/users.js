@@ -1,6 +1,7 @@
 const mongoose=require("mongoose");
 const bcrypt = require("bcryptjs");
-const userSchema=({
+
+const userSchema= new mongoose.Schema({
     name: { type: String },
     age: { type: Number },
     email: { type: String, required: true, unique: true },
@@ -12,4 +13,10 @@ const userSchema=({
     patientHistory:[{type: mongoose.Schema.Types.ObjectId, ref: "PatientCase"}]
 });
 //pre middleware
+
+userSchema.pre("save", async function(){
+this.email=this.email.toLowerCase();
+this.password=await bcrypt.hash(this.password,10);
+})
+
 module.exports=mongoose.model("User",userSchema)

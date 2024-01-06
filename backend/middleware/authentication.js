@@ -1,14 +1,16 @@
 const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 
 //check if the user is logged in 
 const authentication = (req, res, next) => {
 
   if (req.headers.authorization) {
-    const token = req.headers.authorization.split("").pop();
+    const token = req.headers.authorization.split(" ").pop();
+    // console.log(token);
     try {
       const parsedToken = jwt.verify(token, process.env.SECRET);
       req.token = parsedToken;
+      // console.log(parsedToken);
       next();
     } catch {
       res
