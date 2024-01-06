@@ -1,8 +1,13 @@
 const appointment = require("../models/appointment");
 const appointmentsModel = require("../models/appointment");
+const scheduleSModel=require("../models/schedule");
 
+ const getAllAppointment=()=>{
+const newAppointment= new appointmentsModel({patient,doctor,date,clinic,isBooked:true});
+
+ }
 const bookAppointment=(req,res)=>{
-const {patient,doctor,date,hour,clinic}=req.body;
+const {patient,doctor,date,clinic}=req.body;
 // const specificDate = new Date('2024-01-06T12:00:00Z');
 const newAppointment= new appointmentsModel({patient,doctor,date,clinic,isBooked:true});
 
@@ -39,8 +44,7 @@ newAppointment.save()
 
 
 }
- const 
-
+ 
 module.exports={
 bookAppointment,
 }
