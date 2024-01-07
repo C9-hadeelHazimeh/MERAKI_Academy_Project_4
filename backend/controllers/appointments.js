@@ -1,4 +1,4 @@
-const appointment = require("../models/appointment");
+// const appointment = require("../models/appointment");
 const appointmentsModel = require("../models/appointment");
 const scheduleModel=require("../models/schedule");
 // process.env.DB_URI.appointments.getIndexes()
@@ -24,7 +24,7 @@ const newAppointment= new scheduleModel({doctor,date,clinic,isBooked:true});
 })
 
 
-const getAllAppointment=(async(req,res)=>{
+const getAvailableAppointment=(async(req,res)=>{
 
    try {
     //const newAppointment= new scheduleModel({doctor,date,clinic,isBooked:true});
@@ -77,5 +77,5 @@ const bookAppointment=((req,res)=>{
 module.exports={
 bookAppointment,
 schedule,
-getAllAppointment
+getAvailableAppointment
 }

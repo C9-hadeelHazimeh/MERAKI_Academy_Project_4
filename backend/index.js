@@ -7,8 +7,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 // Import Routers
 const usersRouter = require("./routes/users");
-const roleRouter=require("./routes/roles")
+const roleRouter=require("./routes/roles");
 const appointmentsRouter=require("./routes/appointments");
+const patientCaseRouter=require("./routes/patientCases");
 app.use(cors());
 app.use(express.json());
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use("/users", usersRouter);
 app.use("/roles",roleRouter);
 app.use("/appointments",appointmentsRouter);
+app.use("/cases",patientCaseRouter);
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 
