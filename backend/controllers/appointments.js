@@ -1,7 +1,7 @@
 // const appointment = require("../models/appointment");
 const appointmentsModel = require("../models/appointment");
 const scheduleModel = require("../models/schedule");
-// process.env.DB_URI.appointments.getIndexes()
+
 
 const schedule = (req, res) => {
   const { doctor, date, clinic } = req.body;
@@ -69,8 +69,9 @@ const bookAppointment = async (req, res) => {
   const filter = { _id: scheduleId };
   const update = { isBooked: true };
   //  console.log("newAppointment",newAppointment)
-  // if (!scheduleId){
-  //find shcedulemodel=>find (scheduleid)=>isBooked=true =>Appointment is already booked
+ 
+  //find shcedulemodel=>find (scheduleid)if (isBooked=true) =>Appointment is already booked
+  //else save the appointment 
   const checkschedule = await scheduleModel.findOne({ _id: scheduleId });
   console.log("checkschedule", checkschedule.isBooked);
   if (checkschedule.isBooked) {
