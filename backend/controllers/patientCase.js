@@ -65,24 +65,6 @@ const getPatientHistory = (req, res) => {
     });
 };
 
-// const updateHistoryById = (req,res) => {
-// const {historyId}=req.params;
-// const filter={_id:historyId};
-// //const update={diagnosis:"stomache",treatment:"fomodar"};
-// const update=req.body;
-// patient.findOneAndUpdate(filter,update).then((result)=>{
-//   res.status(201).json({
-//     success: true,
-//     message: "patient treatment or diagnosis updated",
-//     patientCase:result
-//   });
-// }).catch((err)=>{
-//   res.status(500).json({
-//     success: false,
-//     message: `Server Error`,
-//     Error: err.message,
-//   });
-// })
 const updateHistoryById = (req, res) => {
   const {historyId} = req.params;
   const filter = req.body;
@@ -91,7 +73,7 @@ const updateHistoryById = (req, res) => {
     filter[key].toString().replaceAll(" ", "") == "" && delete filter[key];
   });
   patientCase
-    .findOneAndUpdate({ _id: historyId }, req.body, { new: true })
+    .findOneAndUpdate({ _id: historyId }, req.body, { new: true }).populate("doctor")
     .then((result) => {
       console.log("Result",result)
       if (!result) {
@@ -102,7 +84,7 @@ const updateHistoryById = (req, res) => {
       }
       res.status(202).json({
         success: true,
-        message: `patient History  updated`,
+        message: `patient History updated`,
         upatedpatientCase:result,
       });
     })

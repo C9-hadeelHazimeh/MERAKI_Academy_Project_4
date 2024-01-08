@@ -3,14 +3,28 @@ const appointmentsModel = require("../models/appointment");
 const scheduleModel = require("../models/schedule");
 
 
-const schedule = (req, res) => {
-  const { doctor, date, clinic } = req.body;
+const schedule = (async(req, res) => {
+  const {doctorId}=req.params;
+  const {date, clinic} = req.body;
+
   const availableAppointment = new scheduleModel({
-    doctor,
+    doctor:doctorId,
     date,
     clinic,
     isBooked: false,
   });
+//check if the doctor is available at this date 
+  const checkDoctor= await scheduleModel.findOne({ doctor: doctorId,
+    date:date});
+  console.log("Doctor:",checkDoctor)
+
+ if (checkDoctor)
+ {
+  return res.status(400).json({
+    success: false,
+    message: "Doctor is already scheduled for the specified date",
+  });
+ }
   availableAppointment
     .save()
     .then((result) => {
@@ -28,14 +42,15 @@ const schedule = (req, res) => {
         Error: err.message,
       });
     });
-};
+});
 
 const getAvailableAppointment = async (req, res) => {
   try {
     //const newAppointment= new scheduleModel({doctor,date,clinic,isBooked:true});
-    const checkBooking = await appointmentsModel
-      .find({ isBooked: false })
-      .populate("schedule");
+    const checkBooking = await scheduleModel
+      .find({ isBooked:false })
+      .populate("doctor","name");
+      console.log(checkBooking)
 
     if (checkBooking.length) {
       res.status(200).json({
@@ -49,7 +64,9 @@ const getAvailableAppointment = async (req, res) => {
         message: `No appointments available`,
       });
     }
-  } catch {
+  } 
+  
+  catch(err) {
     res.status(500).json({
       success: false,
       message: `Server Error`,
@@ -59,21 +76,38 @@ const getAvailableAppointment = async (req, res) => {
 };
 
 //in this function the patient can book from the schedule
-const bookAppointment = async (req, res) => {
+const bookAppointment = (async (req, res) => {
   const { patient } = req.body;
   const { scheduleId } = req.params;
+  
+  //check if the patient has an appointment at the same time 
+  const existingAppointment = await appointmentsModel.findOne({
+    // schedule: scheduleId,
+    patient: patient
+  });
+
+  if (existingAppointment) {
+     return res.status(409).json({
+      success: false,
+      message: "Patient already has an appointment at this time.",
+    });
+  }
+  //if the patient dosent have appointment at the same time=> create new appointment 
+
   const newAppointment = new appointmentsModel({
     schedule: scheduleId,
-    patient: patient,
+    patient,
   });
+
   const filter = { _id: scheduleId };
   const update = { isBooked: true };
-  //  console.log("newAppointment",newAppointment)
- 
+
   //find shcedulemodel=>find (scheduleid)if (isBooked=true) =>Appointment is already booked
   //else save the appointment 
+
   const checkschedule = await scheduleModel.findOne({ _id: scheduleId });
-  console.log("checkschedule", checkschedule.isBooked);
+  console.log("checkschedule", checkschedule);
+  
   if (checkschedule.isBooked) {
     res.status(409).json({
       success: false,
@@ -89,7 +123,9 @@ const bookAppointment = async (req, res) => {
         message: "Appointment is booked Successfully",
         appointment: result,
       });
+   
     })
+   
     .catch((err) => {
       res.status(500).json({
         success: false,
@@ -97,7 +133,7 @@ const bookAppointment = async (req, res) => {
         Error: err.message,
       });
     });
-};
+});
 
 module.exports = {
   bookAppointment,

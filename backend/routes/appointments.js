@@ -4,7 +4,7 @@ const authorization=require("../middleware/authorization");
 const { bookAppointment,getAvailableAppointment,schedule } = require("../controllers/appointments");
 const appointmentsRouter = express.Router();
 appointmentsRouter.get("/",authentication,getAvailableAppointment);
-appointmentsRouter.post("/book",schedule)
-appointmentsRouter.post("/:scheduleId/appointment",authentication,authorization("Book"),bookAppointment);
+appointmentsRouter.post("/:doctorId/book",schedule)
+appointmentsRouter.post("/:scheduleId/appointment",authentication,authorization("book"),bookAppointment);
 
 module.exports = appointmentsRouter;
