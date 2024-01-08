@@ -31,6 +31,19 @@ console.log(result)
       });
     });
 };
+
+const getPatientHistory=(req,res)=>{
+//get by patient name
+
+
+
+
+}
+
+const updateHistoryById=()=>{
+
+}
+
 module.exports = {
   createPatientCase,
 };

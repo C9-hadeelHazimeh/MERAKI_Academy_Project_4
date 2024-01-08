@@ -5,6 +5,6 @@ const { bookAppointment,getAvailableAppointment,schedule } = require("../control
 const appointmentsRouter = express.Router();
 appointmentsRouter.get("/",authentication,getAvailableAppointment);
 appointmentsRouter.post("/book",schedule)
-appointmentsRouter.post("/appointment",authentication,authorization("Book"),bookAppointment);
+appointmentsRouter.post("/:scheduleId/appointment",authentication,authorization("Book"),bookAppointment);
 
 module.exports = appointmentsRouter;
