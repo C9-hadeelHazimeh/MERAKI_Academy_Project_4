@@ -53,7 +53,7 @@ const getAllClinics = (req, res) => {
   const userId = req.token.userId;
   clinicModel
     .find()
-    .populate("clinicName")
+    .populate("reviews").populate("doctor","name").populate("clinicName")
     .exec()
     .then((result) => {
       if (result.length) {

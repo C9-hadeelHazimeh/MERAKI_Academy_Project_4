@@ -7,6 +7,6 @@ const patientCaseRouter = express.Router();
 
 patientCaseRouter.post("/create/:patientId",authentication,authorization("Create"),createPatientCase)
 patientCaseRouter.get("/get/:patientId",getPatientHistory)
-patientCaseRouter.put("/update/:historyId",authentication,authorization(),updateHistoryById)
+patientCaseRouter.put("/update/:historyId",authentication,authorization("update"),updateHistoryById)
 module.exports = patientCaseRouter;
 
