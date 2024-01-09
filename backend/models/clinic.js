@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const clinicSchema = new mongoose.Schema({
 clinicName: { type: String, required: true },
 image: {type:String},
-doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+doctor: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 reviews:[{type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
 });
 
