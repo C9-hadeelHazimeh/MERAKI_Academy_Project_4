@@ -82,8 +82,7 @@ const bookAppointment = (async (req, res) => {
   
   //check if the patient has an appointment at the same time 
   const existingAppointment = await appointmentsModel.findOne({
-    // schedule: scheduleId,
-    patient: patient
+      patient: patient
   });
 
   if (existingAppointment) {

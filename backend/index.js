@@ -10,6 +10,7 @@ const usersRouter = require("./routes/users");
 const roleRouter=require("./routes/roles");
 const appointmentsRouter=require("./routes/appointments");
 const patientCaseRouter=require("./routes/patientCases");
+const clinicRouter=require("./routes/clinic")
 app.use(cors());
 app.use(express.json());
 
@@ -18,6 +19,7 @@ app.use("/users", usersRouter);
 app.use("/roles",roleRouter);
 app.use("/appointments",appointmentsRouter);
 app.use("/cases",patientCaseRouter);
+app.use("/clinics",clinicRouter);
 // Handles any other endpoints [unassigned - endpoints]
 app.use("*", (req, res) => res.status(404).json("NO content at this path"));
 

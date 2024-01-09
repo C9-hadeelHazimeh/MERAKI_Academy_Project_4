@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 
 const clinicSchema = new mongoose.Schema({
 clinicName: { type: String, required: true },
-image: {string},
+image: {type:String},
 doctors: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-review:[{ObjectId}]
+reviews:[{type: mongoose.Schema.Types.ObjectId, ref: "Review"}]
 });
 
 module.exports = mongoose.model("Clinic", clinicSchema);

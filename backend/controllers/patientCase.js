@@ -7,21 +7,23 @@ const createPatientCase = (req, res) => {
   const doctor = req.token.userId;
   //determined patient
   const { patientId } = req.params;
-  const newCase = new patientCase({ diagnosis, treatment });
+  const newCase = new patientCase({diagnosis,treatment});
+  console.log(newCase)
   newCase
     .save()
     .then(async (result) => {
+      console.log("result",result)
       await patient.findOneAndUpdate(
         { _id: patientId },
-        { $push: { patientHistory: result } },
-
-        { new: true, useFindAndModify: false }
-      );
-      console.log(result);
+        {  $push: { patientHistory: result} },
+        {new:true}
+      )
+     
       res.status(201).json({
         success: true,
         message: "diagnosis and treatment are created",
         patientHistory: result,
+        // doctorName:result.doctor
       });
     })
     .catch((err) => {
@@ -38,8 +40,9 @@ const getPatientHistory = (req, res) => {
   const { patientId } = req.params;
   console.log(patientId);
   patient
-    .findOne({ _id: patientId }).populate("patientHistory")
-    .then((result) => {
+  .findOne({ _id: patientId })
+  .populate("patientHistory")
+   .then((result) => {
       console.log("result", result);
       if (!result) {
         res.status(409).json({
@@ -50,8 +53,9 @@ const getPatientHistory = (req, res) => {
       res.status(200);
       res.json({
         success: true,
-        message: `The patient History ${patientId}`,
+        message: "The patient History",
         patientHistory: result.patientHistory,
+        patientName:result.name
       });
     })
 
