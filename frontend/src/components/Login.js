@@ -1,29 +1,92 @@
-import React from 'react'
-import Form from 'react-bootstrap/Form';
-import "../../src/App.css"
-import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import React, { useContext, useState } from "react";
+import Form from "react-bootstrap/Form";
+import "../../src/App.css";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import { UserContext } from "../App";
+import axios from "axios";
 const Login = () => {
-  return (
-    <div>
-    <div className='container'>
-<Form>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="name@example.com" />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-        <Form.Label>passWord</Form.Label>
-        <Form.Control  />
-      </Form.Group>
-    </Form>
-    {/* navigate */}
-    <Button ><Link to="/home">Home</Link></Button>{' '}
-    </div>
-    
-    </div>
+    // UserContext
+    const [email, setemail] = useState("");
+    const [password, setPassword] = useState(0);
+    const [message, setmessage] = useState("");
+    const [mesageStatus, setMessageStatus] = useState(true);
+    const [errormessage, setErrormessage] = useState("");
+    const {token,isLoggedIn,setIsLoggedIn,setToken}=useContext(UserContext);
    
-  )
-}
+    const userLogin=(e)=>{
+        // e.preventDefault();
+    const user = { email, password };
+    console.log(user)
+    axios
+    .post("http://localhost:5000/users/login",user,{
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })   
+   console.log("test")
+    .then((result) => {
+     console.log(result)
+       setMessageStatus(true);
+      setmessage(result.data.message);
+      //store the token in local storage 
+      localStorage.setItem("token", result.data.token);
+      localStorage.setItem("isLoggedIn",true)
+      console.log("token:",result.data.token)
+      setToken(result.data.token)            
+      setIsLoggedIn(true)
+    //   navigate("/dashboard")
+     
+     })
+    .catch((err) => {
+      console.log("err>>:", err);
+      setMessageStatus(false);
+     setErrormessage(err.response.data.message);
+    });
 
-export default Login
+    }
+
+
+  return (
+    <div className="container">
+      <Form>
+        <Form.Group as={Row} className="mb-3">
+          <Form.Label column sm={2}>
+            Email
+          </Form.Label>
+          <Col sm={10}>
+            <Form.Control type="email" placeholder="your Email..."
+             onChange={(e)=>{setemail(e.target.value)}}/>
+          </Col>
+        </Form.Group>
+
+        <Form.Group
+          as={Row}
+          className="mb-3"
+          controlId="formHorizontalPassword"
+        >
+          <Form.Label column sm={2}>
+            Password
+          </Form.Label>
+          <Col sm={10}>
+            <Form.Control type="password" placeholder="your Password..."
+             onChange={(e)=>{setPassword(e.target.value)}} />
+          </Col>
+        </Form.Group>
+
+        <Form.Group as={Row} className="mb-3">
+          <Col sm={{ span: 10, offset: 2 }}>
+            <Button type="submit" onClick={userLogin}>Login</Button>
+          </Col>
+        </Form.Group>
+      </Form>
+
+      {mesageStatus? <p>{message}</p>:<p>{errormessage}</p>}    
+      {isLoggedIn?<div>welcome</div>:<p>you are not logged In</p>}
+    </div>
+  );
+
+  }
+export default Login;

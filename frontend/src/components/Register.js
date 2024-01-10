@@ -7,7 +7,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
   const [name, settName] = useState("");
   const [age, setage] = useState(0);
   const [email, setEmail] = useState("");
@@ -36,22 +36,21 @@ const Register = () => {
   //if he is patient show the date that related to the patient => else show the date of doctor
   const handleRadioChoice = (e) => {
     setRole(e.target.value);
-    console.log(role)
+    console.log(role);
   };
-  
+
   const createNewUser = (e) => {
     e.preventDefault();
-    const newUser = { name, age, email, password, phoneNumber};
+    const newUser = { name, age, email, password, phoneNumber };
     console.log(newUser);
     axios
       .post("http://localhost:5000/users/register", newUser)
       .then((res) => {
-        
+        console.log("res", res.data);
         //set massage that comes from Backend
         setMessageStatus(true);
         setmessage(res.data.message);
 
-        
         // navigate("/login");
       })
       .catch((err) => {
@@ -184,55 +183,57 @@ const Register = () => {
           </Form.Group>
         </fieldset>
         {role === "659c1d016497cdf283b73d84" ? (
-          
-                <Form.Group
-              as={Row}
-              className="mb-3"
-              controlId="formHorizontalPassword"
-            >
-              <Form.Label column sm={2}>
+          <Form.Group
+            as={Row}
+            className="mb-3"
+            controlId="formHorizontalPassword"
+          >
+            <Form.Label column sm={2}>
               Specialist
-              </Form.Label>
-              <Col sm={10}>
-                <Form.Control
-                  type="text"
-                  placeholder="your Specialist ..."
-                  onChange={(e) => {
-                    setSpecialist(e.target.value);
-                  }}
-                />
-              </Col>
-            </Form.Group>
-         
-        ) :    <></>    
-            
-        }
+            </Form.Label>
+            <Col sm={10}>
+              <Form.Control
+                type="text"
+                placeholder="your Specialist ..."
+                onChange={(e) => {
+                  setSpecialist(e.target.value);
+                }}
+              />
+            </Col>
+          </Form.Group>
+        ) : (
+          <></>
+        )}
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit"  onClick={createNewUser}>
+            <Button type="submit" onClick={createNewUser}>
               Register
             </Button>
           </Col>
         </Form.Group>
       </Form>
+      {messageStatus ? (
+        <>
+          <h5>{message}</h5>
 
-      {messageStatus ?  <>
-      <h4>{message}</h4>
-      
-      <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit" onClick={()=>{navigate("/login")}}>
-              login
-            </Button>
-          </Col>
-        </Form.Group>
-
-      </>
-      : <div>{errormessage}</div>}
-
-    
-</div>
+          <Form.Group as={Row} className="mb-3">
+            <Col sm={{ span: 10, offset: 2 }}>
+              <Button
+                type="submit"
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                Login
+              </Button>
+            </Col>
+          </Form.Group>
+        </>
+      ) : (
+        <div>{errormessage}</div>
+      )}
+    </div>
   );
 };
 
