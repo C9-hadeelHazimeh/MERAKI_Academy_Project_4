@@ -1,10 +1,11 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form';
 import "../../src/App.css"
-
-
+import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 const Login = () => {
   return (
+    <div>
     <div className='container'>
 <Form>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -16,10 +17,10 @@ const Login = () => {
         <Form.Control  />
       </Form.Group>
     </Form>
-
+    <Button onClick={()=>{<Link to="/home"></Link>}}>Home</Button>{' '}
     </div>
-
-
+    
+    </div>
    
   )
 }
