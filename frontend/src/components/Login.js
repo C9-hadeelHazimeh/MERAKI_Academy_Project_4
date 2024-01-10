@@ -17,7 +17,8 @@ const Login = () => {
         <Form.Control  />
       </Form.Group>
     </Form>
-    <Button onClick={()=>{<Link to="/home"></Link>}}>Home</Button>{' '}
+    {/* navigate */}
+    <Button ><Link to="/home">Home</Link></Button>{' '}
     </div>
     
     </div>
