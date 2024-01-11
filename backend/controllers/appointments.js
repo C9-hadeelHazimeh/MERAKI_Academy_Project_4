@@ -4,9 +4,8 @@ const scheduleModel = require("../models/schedule");
 
 
 const schedule = (async(req, res) => {
-  const {doctorId}=req.params;
+  const doctorId=req.token.userId
   const {date, clinic} = req.body;
-
   const availableAppointment = new scheduleModel({
     doctor:doctorId,
     date,
@@ -32,6 +31,7 @@ const schedule = (async(req, res) => {
         success: true,
         message: "Appointment is available to be booked",
         availableAppointment: result,
+        userId:doctorId
       });
       
     })
@@ -52,7 +52,7 @@ const getAvailableAppointment = async (req, res) => {
     const checkBooking = await scheduleModel
       .find({ isBooked:false })
       .populate("doctor","name");
-      console.log(checkBooking)
+      // console.log(checkBooking)
 
     if (checkBooking.length) {
       res.status(200).json({
@@ -81,7 +81,7 @@ const getAvailableAppointment = async (req, res) => {
 //in this function the patient can book from the schedule
 const bookAppointment = (async (req, res) => {
   const  patient  = req.token.userId;
- console.log("req.token.userId",req.token.userId,patient)
+ //console.log("req.token.userId",req.token.userId,patient)
   const { scheduleId } = req.params;
   
   //check if the patient has an appointment at the same time 
@@ -120,7 +120,7 @@ const bookAppointment = (async (req, res) => {
   newAppointment
     .save()
     .then(async (result) => {
-      console.log("patient",result)
+      //console.log("patient",result)
       await scheduleModel.findOneAndUpdate(filter, update);
       res.status(201).json({
         success: true,

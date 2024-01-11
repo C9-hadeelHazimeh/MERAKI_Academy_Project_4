@@ -102,9 +102,41 @@ const login = (req, res) => {
         Error: err.message,
       });
     });
+
+
+
+
+    
 };
+
+
+
+const getUserRole = (req, res) => {
+  
+  try {
+  const loggedInUserRole = req.token.role.role;
+
+  res.status(200).json({
+    success: true,
+    message: "User role",
+    role: loggedInUserRole,
+  });
+} catch (error) {
+  res.status(500).json({
+    success: false,
+    message: 'Server Error',
+    error: error.message,
+  });
+}}
+  
+
+
+
+
+
 
 module.exports = {
   register,
   login,
+  getUserRole
 };

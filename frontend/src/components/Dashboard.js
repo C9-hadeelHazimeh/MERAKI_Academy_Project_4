@@ -18,24 +18,24 @@ const Dashboard = () => {
     const [Patient,setPatient]=useState("");
     const [message,setMessage]=useState("")
     //get All availableAppointments (scheduled in database)
-    useEffect(() => {
-      axios
-        .get(`http://localhost:5000/appointments/`,{
-          headers: {
-            authorization: `Bearer ${token}`,
-          },
-        })
-        .then((result) => {
-        console.log("result.data.sechdule",result.data);
-        //set userId with the patient id 
-         setUserId(result.data.patient);
-         setAvailableAppointments(result.data.sechdule)
-        //   console.log(availableAppointments)
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }, []);
+    // useEffect(() => {
+    //   axios
+    //     .get(`http://localhost:5000/appointments/`,{
+    //       headers: {
+    //         authorization: `Bearer ${token}`,
+    //       },
+    //     })
+    //     .then((result) => {
+    //     console.log("result.data.sechdule",result.data);
+    //     //set userId with the patient id 
+    //      setUserId(result.data.patient);
+    //      setAvailableAppointments(result.data.sechdule)
+    //     //   console.log(availableAppointments)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
+    // }, []);
   
  const BookAppointemts=(availableAppointmentId)=>{
 //  //sechduleId
@@ -45,8 +45,10 @@ const Dashboard = () => {
       authorization: `Bearer ${token}`,
     },
   }).then((result)=>{
-    setPatient(result.data.patient);
-     console.log("patient",Patient,userId)
+    console.log(result)
+    setPatient(result.data.appointment.patient);
+     console.log("patient",Patient,"userId",userId)
+     setMessage(result.data.message)
     }).catch((err)=>{
      console.log(err)
     })
@@ -92,10 +94,12 @@ const Dashboard = () => {
       {/* {userId?Patient:""} */}
 
      
-      <Button variant="primary" onClick={BookAppointemts}>
+      <Button variant="primary" onClick={()=>{BookAppointemts(availableAppointment._id)
+    
+    }}>
         Book this appointment</Button>
     </Card>
-
+    {/* <p>{message}</p> */}
         {/* <div></div>
          <div>{availableAppointment.doctor.name}</div> 
          <div>{availableAppointment.date}</div>  */}

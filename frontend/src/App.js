@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import Register from "./components/Register";
 import { Routes, Route, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
+import Schedule from "./components/Schedule"
 export const UserContext = createContext();
 function App() {
   
@@ -16,12 +17,13 @@ function App() {
     <div className="App">
       <UserContext.Provider value={{token, setToken,isLoggedIn,setIsLoggedIn}}>
       <h1><Link to="/home">Home</Link></h1>
-     
+    
       <Routes>
       <Route path="/home" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/register" element={<Register/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>
+      <Route path="/schedule" element={<Schedule/>}/>
       </Routes> 
       </UserContext.Provider>
     </div>

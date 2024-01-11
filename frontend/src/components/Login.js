@@ -15,13 +15,15 @@ const Login = () => {
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(true);
   const [errormessage, setErrormessage] = useState("");
-  const { token, isLoggedIn, setIsLoggedIn, setToken } =useContext(UserContext);
+  const [Role, setRole] = useState("");
+  const { token, isLoggedIn, setIsLoggedIn, setToken } =
+    useContext(UserContext);
 
-const navigate=useNavigate();
+  const navigate = useNavigate();
   const userLogin = (e) => {
     // e.preventDefault();
     const user = { email, password };
-    console.log("loggeduser :",user);
+    console.log("loggeduser :", user);
     axios
       .post("http://localhost:5000/users/login", user, {
         headers: {
@@ -30,21 +32,41 @@ const navigate=useNavigate();
       })
 
       .then((result) => {
-        // console.log(result);
         setMessageStatus(true);
-        setmessage(result.data.message);//I have to remove this and make the messages as alerts 
+        setmessage(result.data.message); //I have to remove this and make the messages as alerts
         //store the token in local storage
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("isLoggedIn", true);
-        // console.log("token:", result.data.token);
         setToken(result.data.token);
         setIsLoggedIn(true);
-          navigate("/dashboard")
+        // console.log(token);
+        userRole();
       })
       .catch((err) => {
-        
         setMessageStatus(false);
         setErrormessage(err.response.data.message);
+      });
+  };
+
+  const userRole = () => {
+    axios
+      .get(`http://localhost:5000/users/`, {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      })
+      .then((result) => {
+        setRole(result.data.role);
+        console.log(Role);
+
+        if (Role === "patient") {
+          navigate("/dashboard");
+        } else if (Role === "Doctor") {
+          navigate("/schedule");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 

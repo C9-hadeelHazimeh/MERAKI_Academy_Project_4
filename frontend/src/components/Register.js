@@ -1,11 +1,11 @@
-import React, { useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+export const RoleContext = createContext();
 const Register = () => {
   const navigate = useNavigate();
   const [name, settName] = useState("");
@@ -48,7 +48,7 @@ const Register = () => {
     axios
       .post("http://localhost:5000/users/register", newUser)
       .then((res) => {
-        console.log("res", res.data);
+        
         //set massage that comes from Backend
         setMessageStatus(true);
         setmessage(res.data.message);
@@ -64,6 +64,7 @@ const Register = () => {
 
   return (
     <div className="container">
+      <RoleContext.Provider value={{role,setRole}}>
       Register
       <Form>
         <Form.Group
@@ -236,6 +237,7 @@ const Register = () => {
       ) : (
         <div>{errormessage}</div>
       )}
+      </RoleContext.Provider>
     </div>
   );
 };
