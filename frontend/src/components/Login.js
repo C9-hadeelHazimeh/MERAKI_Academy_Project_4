@@ -21,7 +21,7 @@ const navigate=useNavigate();
   const userLogin = (e) => {
     // e.preventDefault();
     const user = { email, password };
-    console.log(user);
+    console.log("loggeduser :",user);
     axios
       .post("http://localhost:5000/users/login", user, {
         headers: {
@@ -30,19 +30,19 @@ const navigate=useNavigate();
       })
 
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setMessageStatus(true);
         setmessage(result.data.message);//I have to remove this and make the messages as alerts 
         //store the token in local storage
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("isLoggedIn", true);
-        console.log("token:", result.data.token);
+        // console.log("token:", result.data.token);
         setToken(result.data.token);
         setIsLoggedIn(true);
           navigate("/dashboard")
       })
       .catch((err) => {
-        console.log("err>>:", err);
+        
         setMessageStatus(false);
         setErrormessage(err.response.data.message);
       });
@@ -61,7 +61,7 @@ const navigate=useNavigate();
               placeholder="your Email..."
               onChange={(e) => {
                 setemail(e.target.value);
-                console.log(email);
+                // console.log(email);
               }}
             />
           </Col>
@@ -81,7 +81,7 @@ const navigate=useNavigate();
               placeholder="your Password..."
               onChange={(e) => {
                 setPassword(e.target.value);
-                console.log(password);
+                // console.log(password);
               }}
             />
           </Col>
