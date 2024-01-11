@@ -15,39 +15,40 @@ const Dashboard = () => {
     
     const [userId, setUserId] = useState("");
     const { token } = useContext(UserContext);
-   
+    const [Patient,setPatient]=useState("");
+    const [message,setMessage]=useState("")
     //get All availableAppointments (scheduled in database)
     useEffect(() => {
       axios
-        .get(`http://localhost:5000/appointments/`, {
+        .get(`http://localhost:5000/appointments/`,{
           headers: {
             authorization: `Bearer ${token}`,
           },
         })
         .then((result) => {
-            console.log("result.data.sechdul",result.data.sechdule);
-          //state for userid
-        //   setUserId(result.data.userId);
-          setAvailableAppointments(result.data.sechdule)
-          console.log(availableAppointments)
+        console.log("result.data.sechdule",result.data);
+        //set userId with the patient id 
+         setUserId(result.data.patient);
+         setAvailableAppointments(result.data.sechdule)
+        //   console.log(availableAppointments)
         })
         .catch((err) => {
           console.log(err);
         });
     }, []);
   
-    const BookAppointemts=(availableAppointmentId)=>{
- //sechduleId
- console.log("test")
-   axios.post(`http://localhost:5000/appointments/${availableAppointmentId}/appointment`,{
+ const BookAppointemts=(availableAppointmentId)=>{
+//  //sechduleId
+//  console.log(availableAppointmentId)
+ axios.post(`http://localhost:5000/appointments/${availableAppointmentId}/appointment`,{}, {
     headers: {
       authorization: `Bearer ${token}`,
     },
   }).then((result)=>{
-    setUserId(result.data.userId);
-     console.log("result",result)
+    setPatient(result.data.patient);
+     console.log("patient",Patient,userId)
     }).catch((err)=>{
-
+     console.log(err)
     })
 
 
@@ -69,7 +70,7 @@ const Dashboard = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
           <Nav.Link><Link to="/login">Book an appointment</Link></Nav.Link>
-          <Nav.Link><Link to="/register"> patient History</Link></Nav.Link>
+          <Nav.Link><Link to="/register">patient History</Link></Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
@@ -86,9 +87,13 @@ const Dashboard = () => {
         <ListGroup.Item>{availableAppointment.clinic}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.doctor.name}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
+        <ListGroup.Item>{availableAppointment._id}</ListGroup.Item>
       </ListGroup>
+      {/* {userId?Patient:""} */}
 
-      <Button variant="primary" onClick={BookAppointemts(availableAppointment._id)} >Book this appointment</Button>
+     
+      <Button variant="primary" onClick={BookAppointemts}>
+        Book this appointment</Button>
     </Card>
 
         {/* <div></div>

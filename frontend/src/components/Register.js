@@ -38,7 +38,7 @@ const Register = () => {
   //if he is patient show the date that related to the patient => else show the date of doctor
   const handleRadioChoice = (e) => {
     setRole(e.target.value);
-    // console.log(role);
+    console.log(role,e.target.value);
   };
 
   const createNewUser = (e) => {

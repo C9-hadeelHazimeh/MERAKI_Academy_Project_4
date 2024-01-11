@@ -16,7 +16,7 @@ const schedule = (async(req, res) => {
 //check if the doctor is available at this date 
   const checkDoctor= await scheduleModel.findOne({ doctor: doctorId,
     date:date});
-  console.log("Doctor:",checkDoctor)
+  
 
  if (checkDoctor)
  {
@@ -33,7 +33,7 @@ const schedule = (async(req, res) => {
         message: "Appointment is available to be booked",
         availableAppointment: result,
       });
-      console.log(result);
+      
     })
     .catch((err) => {
       res.status(500).json({
@@ -45,8 +45,10 @@ const schedule = (async(req, res) => {
 });
 
 const getAvailableAppointment = async (req, res) => {
+  const patient=req.token.userId;
   try {
-    //const newAppointment= new scheduleModel({doctor,date,clinic,isBooked:true});
+  
+
     const checkBooking = await scheduleModel
       .find({ isBooked:false })
       .populate("doctor","name");
@@ -57,6 +59,7 @@ const getAvailableAppointment = async (req, res) => {
         success: true,
         message: `All available appointments`,
         sechdule: checkBooking,
+        patient:patient
       });
     } else {
       res.status(409).json({
