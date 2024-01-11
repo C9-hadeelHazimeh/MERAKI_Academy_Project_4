@@ -13,7 +13,9 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(0);
   const [phoneNumber, setphoneNumber] = useState(0);
+  
   const [role, setRole] = useState(null);
+
   //const patienrole
   //const doctorrole
 
@@ -36,12 +38,12 @@ const Register = () => {
   //if he is patient show the date that related to the patient => else show the date of doctor
   const handleRadioChoice = (e) => {
     setRole(e.target.value);
-    console.log(role);
+    // console.log(role);
   };
 
   const createNewUser = (e) => {
     e.preventDefault();
-    const newUser = { name, age, email, password, phoneNumber };
+    const newUser = { name, age, email, password, phoneNumber,role };
     console.log(newUser);
     axios
       .post("http://localhost:5000/users/register", newUser)
@@ -170,6 +172,7 @@ const Register = () => {
                 checked={role === "doctor"} //doctorRole
                 onChange={handleRadioChoice}
               />
+
               <Form.Check
                 type="radio"
                 label="patient"

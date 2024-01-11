@@ -77,27 +77,28 @@ const getAvailableAppointment = async (req, res) => {
 
 //in this function the patient can book from the schedule
 const bookAppointment = (async (req, res) => {
-  const { patient } = req.body;
+  const  patient  = req.token.userId;
+ console.log("req.token.userId",req.token.userId,patient)
   const { scheduleId } = req.params;
   
   //check if the patient has an appointment at the same time 
-  const existingAppointment = await appointmentsModel.findOne({
-      patient: patient
-  });
+  // const existingAppointment = await appointmentsModel.findOne({
+  //     patient: patient
+  // });
 
-  if (existingAppointment) {
-     return res.status(409).json({
-      success: false,
-      message: "Patient already has an appointment at this time.",
-    });
-  }
+  // if (existingAppointment) {
+  //    return res.status(409).json({
+  //     success: false,
+  //     message: "Patient already has an appointment at this time.",
+  //   });
+  // }
   //if the patient dosent have appointment at the same time=> create new appointment 
 
   const newAppointment = new appointmentsModel({
     schedule: scheduleId,
-    patient,
+    patient:patient
   });
-
+  
   const filter = { _id: scheduleId };
   const update = { isBooked: true };
 
@@ -105,7 +106,7 @@ const bookAppointment = (async (req, res) => {
   //else save the appointment 
 
   const checkschedule = await scheduleModel.findOne({ _id: scheduleId });
-  console.log("checkschedule", checkschedule);
+  // console.log("checkschedule", checkschedule);
   
   if (checkschedule.isBooked) {
     res.status(409).json({
@@ -116,16 +117,17 @@ const bookAppointment = (async (req, res) => {
   newAppointment
     .save()
     .then(async (result) => {
+      console.log("patient",result)
       await scheduleModel.findOneAndUpdate(filter, update);
       res.status(201).json({
         success: true,
         message: "Appointment is booked Successfully",
+        patient:patient,
         appointment: result,
       });
    
     })
-   
-    .catch((err) => {
+      .catch((err) => {
       res.status(500).json({
         success: false,
         message: `Server Error`,

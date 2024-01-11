@@ -11,8 +11,8 @@ import Button from 'react-bootstrap/esm/Button';
 
 const Dashboard = () => {
    
-    const [availableAppointments, setAvailableAppointments] = useState([])
-    ;
+    const [availableAppointments, setAvailableAppointments] = useState([]);
+    
     const [userId, setUserId] = useState("");
     const { token } = useContext(UserContext);
    
@@ -27,7 +27,7 @@ const Dashboard = () => {
         .then((result) => {
             console.log("result.data.sechdul",result.data.sechdule);
           //state for userid
-          setUserId(result.data.userId);
+        //   setUserId(result.data.userId);
           setAvailableAppointments(result.data.sechdule)
           console.log(availableAppointments)
         })
@@ -35,6 +35,26 @@ const Dashboard = () => {
           console.log(err);
         });
     }, []);
+  
+    const BookAppointemts=(availableAppointmentId)=>{
+ //sechduleId
+ console.log("test")
+   axios.post(`http://localhost:5000/appointments/${availableAppointmentId}/appointment`,{
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  }).then((result)=>{
+    setUserId(result.data.userId);
+     console.log("result",result)
+    }).catch((err)=>{
+
+    })
+
+
+    }
+
+
+
 
 
   return (
@@ -67,7 +87,8 @@ const Dashboard = () => {
         <ListGroup.Item>{availableAppointment.doctor.name}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
       </ListGroup>
-      <Button variant="primary" >Book this appointment</Button>
+
+      <Button variant="primary" onClick={BookAppointemts(availableAppointment._id)} >Book this appointment</Button>
     </Card>
 
         {/* <div></div>
