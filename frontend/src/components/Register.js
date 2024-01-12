@@ -5,7 +5,8 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-export const RoleContext = createContext();
+
+// export const RoleContext = createContext();
 const Register = () => {
   const navigate = useNavigate();
   const [name, settName] = useState("");
@@ -64,7 +65,7 @@ const Register = () => {
 
   return (
     <div className="container">
-      <RoleContext.Provider value={{role,setRole}}>
+      {/* <RoleContext.Provider value={{role,setRole}}> */}
       Register
       <Form>
         <Form.Group
@@ -237,7 +238,7 @@ const Register = () => {
       ) : (
         <div>{errormessage}</div>
       )}
-      </RoleContext.Provider>
+      {/* </RoleContext.Provider> */}
     </div>
   );
 };
