@@ -18,24 +18,24 @@ const Dashboard = () => {
     const [Patient,setPatient]=useState("");
     const [message,setMessage]=useState("")
     //get All availableAppointments (scheduled in database)
-    // useEffect(() => {
-    //   axios
-    //     .get(`http://localhost:5000/appointments/`,{
-    //       headers: {
-    //         authorization: `Bearer ${token}`,
-    //       },
-    //     })
-    //     .then((result) => {
-    //     console.log("result.data.sechdule",result.data);
-    //     //set userId with the patient id 
-    //      setUserId(result.data.patient);
-    //      setAvailableAppointments(result.data.sechdule)
-    //     //   console.log(availableAppointments)
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
-    // }, []);
+    useEffect(() => {
+      axios
+        .get(`http://localhost:5000/appointments/`,{
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        })
+        .then((result) => {
+        console.log("result.data.sechdule",result.data);
+        //set userId with the patient id 
+         setUserId(result.data.patient);
+         setAvailableAppointments(result.data.sechdule)
+        //   console.log(availableAppointments)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }, []);
   
  const BookAppointemts=(availableAppointmentId)=>{
 //  //sechduleId
@@ -89,7 +89,7 @@ const Dashboard = () => {
         <ListGroup.Item>{availableAppointment.clinic}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.doctor.name}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
-        <ListGroup.Item>{availableAppointment._id}</ListGroup.Item>
+        {/* <ListGroup.Item>{availableAppointment._id}</ListGroup.Item> */}
       </ListGroup>
       {/* {userId?Patient:""} */}
 

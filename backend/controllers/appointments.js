@@ -4,11 +4,18 @@ const scheduleModel = require("../models/schedule");
 
 
 const schedule = (async(req, res) => {
-  const doctorId=req.token.userId
-  const {date, clinic} = req.body;
+const doctorId=req.token.userId
+const {date, clinic} = req.body;
+const dateTime = new Date(date);
+const formattedDate = dateTime.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour:"numeric" });
+const fullDateTime = `${formattedDate}`;
+console.log(fullDateTime)
+
+// const appointment={clinic,date:fullDateTime};
+ 
   const availableAppointment = new scheduleModel({
     doctor:doctorId,
-    date,
+    date:fullDateTime,
     clinic,
     isBooked: false,
   });
