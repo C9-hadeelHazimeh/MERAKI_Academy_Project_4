@@ -12,7 +12,7 @@ const formattedDate = selectedDate.toLocaleString('en-US', { month: 'long', day:
 //time
 const fullTime = time;
 
- console.log("Date", formattedDate, "Time", fullTime);
+//  console.log("Date", formattedDate, "Time", fullTime);
 
 const availableAppointment = new scheduleModel({
   doctor: doctorId,
