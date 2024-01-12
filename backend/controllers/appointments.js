@@ -4,33 +4,34 @@ const scheduleModel = require("../models/schedule");
 
 
 const schedule = (async(req, res) => {
-const doctorId=req.token.userId
-const {date, clinic} = req.body;
-const dateTime = new Date(date);
-const formattedDate = dateTime.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric', hour:"numeric" });
-const fullDateTime = `${formattedDate}`;
-console.log(fullDateTime)
+const doctorId = req.token.userId;
+const { date, clinic, time } = req.body;
+//date
+const selectedDate = new Date(date);
+const formattedDate = selectedDate.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+//time
+const fullTime = time;
 
-// const appointment={clinic,date:fullDateTime};
- 
-  const availableAppointment = new scheduleModel({
-    doctor:doctorId,
-    date:fullDateTime,
-    clinic,
-    isBooked: false,
-  });
-//check if the doctor is available at this date 
-  const checkDoctor= await scheduleModel.findOne({ doctor: doctorId,
-    date:date});
-  
+ console.log("Date", formattedDate, "Time", fullTime);
 
- if (checkDoctor)
- {
+const availableAppointment = new scheduleModel({
+  doctor: doctorId,
+  date: formattedDate,
+  time: fullTime,
+  clinic,
+  isBooked: false,
+});
+
+// check if the doctor is available at this date 
+const checkDoctor = await scheduleModel.findOne({ doctor: doctorId, date: formattedDate, time: fullTime });
+
+if (checkDoctor) {
   return res.status(400).json({
     success: false,
-    message: "Doctor is already scheduled for the specified date",
+    message: "Doctor is already scheduled for the specified date and time",
   });
- }
+}
+
   availableAppointment
     .save()
     .then((result) => {

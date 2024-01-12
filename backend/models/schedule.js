@@ -3,6 +3,7 @@ const scheduleSchema = new mongoose.Schema({
 doctor:{ type: mongoose.Schema.Types.ObjectId, ref: "User" },// doctor:object id from userSchema how?
 clinic:{ type: String },
 isBooked:{type:Boolean,default:false},
-date:{type:String}
+date:{type:String},
+time:{type:String}
 })
 module.exports = mongoose.model("Schedule", scheduleSchema);

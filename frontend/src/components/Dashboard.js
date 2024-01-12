@@ -89,7 +89,7 @@ const Dashboard = () => {
         <ListGroup.Item>{availableAppointment.clinic}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.doctor.name}</ListGroup.Item>
         <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
-        {/* <ListGroup.Item>{availableAppointment._id}</ListGroup.Item> */}
+        <ListGroup.Item>{availableAppointment.time}</ListGroup.Item>
       </ListGroup>
       {/* {userId?Patient:""} */}
 

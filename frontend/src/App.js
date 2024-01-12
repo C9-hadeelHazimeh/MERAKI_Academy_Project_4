@@ -6,6 +6,8 @@ import Register from "./components/Register";
 import { Routes, Route, Link } from "react-router-dom";
 import Dashboard from "./components/Dashboard";
 import Schedule from "./components/Schedule"
+import Case from "./components/Case";
+
 export const UserContext = createContext();
 function App() {
   
@@ -24,6 +26,7 @@ function App() {
       <Route path="/register" element={<Register/>}/>
       <Route path="/dashboard" element={<Dashboard/>}/>
       <Route path="/schedule" element={<Schedule/>}/>
+      <Route path="/patientCase" element={<Case/>}/>
       </Routes> 
       </UserContext.Provider>
     </div>

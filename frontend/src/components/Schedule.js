@@ -9,98 +9,65 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DatePicker from 'react-datepicker';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+ 
 const Schedule = () => {
   const [clinic,setClinic]=useState(null);
-  const [date,setDate]=useState(null)
-  const [hour,setHour]=useState(null)
-  const [clinics] = useState(['Derma', 'Dentist', 'general'])
+  const [date,setDate]=useState(null);
+  const [time,setTime]=useState(null);
+  const [clinics] = useState(['Derma', 'Dentist', 'general']);
+  const [message,setMessage]=useState("");
+  const [errorMessage,setErrorMessage]=useState("");
+  const [messageStatus,setMessageStatus]=useState(false);
+
 const {token}=useContext(UserContext)
 
 const newAvailableAppointemt=()=>{
-// const dateTime = new Date(date);
-// const formattedDate = dateTime.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-// const fullDateTime = `${formattedDate} ${hour}`;
-// const fullDateTime = new Date(
 
-//   `${date.toLocaleDateString()} ${hour}`
-// )
+  const appointment = {clinic,date,time};
 
-    const appointment = { clinic, date };
-// const appointment={clinic,date};
-console.log("Submitted:", appointment);
-console.log("test")
+// console.log("Submitted:", appointment);
+
    axios.post(`http://localhost:5000/appointments/book`,appointment, {
       headers: {
         authorization: `Bearer ${token}`,
       },
     }).then((result)=>{
-      console.log(result)
+      // console.log(result)
+      setMessageStatus(true);
+       setMessage(result.data.message)
+        
      
       }).catch((err)=>{
-       console.log(err)
+      //  console.log(err)
+       setMessageStatus(false);
+      setErrorMessage(err.response.data.message);
       })
       }
 
 
-  return (
+return ( 
 <div className='container'>
+<Form>
+<Navbar expand="lg" className="bg-body-tertiary">
+      <Container>
+      
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+          <Nav.Link><Link to="/schedule">my Schdule</Link></Nav.Link>
+          <Nav.Link><Link to="/patientCase">Add patient Case</Link></Nav.Link>
+           
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar> 
+    </Form>
+       
 
-{/* <Form>
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={2}>
-            Date
-          </Form.Label>
-          <Col sm={10}>
-            <DatePicker
-              selected={date}
-              onChange={(newDate) => setDate(newDate)}
-              dateFormat="MMMM d, yyyy"
-              className="form-control"
-            />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={2}>
-            Hour
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control
-              type="time"
-              onChange={(e) => setHour(e.target.value)}
-            />
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={2}>
-            Clinic
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Select
-              value={clinic}
-              onChange={(e) => setClinic(e.target.value)}
-            >
-              <option value="">Select Clinic</option>
-              {clinics.map((clinicOption, index) => (
-                <option key={index} value={clinicOption}>
-                  {clinicOption}
-                </option>
-              ))}
-            </Form.Select>
-          </Col>
-        </Form.Group>
-
-        <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 10, offset: 2 }}>
-            <Button onClick={newAvailableAppointemt}>
-              Add to the schedule
-            </Button>
-          </Col>
-        </Form.Group>
-      </Form> */}
-
- <Form>
+  <Form>
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm={2}>
             Date
@@ -110,15 +77,8 @@ console.log("test")
               type="date"
               placeholder="The date..."
               onChange={(e) => {
-                const formattedDate = new Date(e.target.value).toLocaleString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
-                  hour: 'numeric',
-                 hour12: true,
-                })
-                console.log(formattedDate)
-                setDate(formattedDate);
+                
+                setDate(e.target.value);
                
               }}
             />
@@ -126,9 +86,9 @@ console.log("test")
         </Form.Group>
 
 
-        <Form.Select value={hour} onChange={(e) => {setHour(e.target.value)
+        <Form.Select value={time} onChange={(e) => {setTime(e.target.value)
       
-        console.log(hour)
+        console.log(time)
         }}>
         <option value="">Select Hour </option>
         <option value="8-9">8:00 AM - 9:00 AM</option>
@@ -149,13 +109,13 @@ console.log("test")
             <Button onClick={newAvailableAppointemt}>Add to the sechdule</Button>
           </Col>
         </Form.Group>
-      </Form>
+      </Form> 
  
-
+{messageStatus?<p>{message}</p>:<p>{errorMessage}</p>}
 
 </div>
+)
 
-  )
 }
 
 export default Schedule
