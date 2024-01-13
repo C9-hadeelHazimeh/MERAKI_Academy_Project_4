@@ -16,7 +16,7 @@ const[diagnosis,setDiagnosis]=useState("");
 const [treatmet,setTreatment]=useState("");
 const {token}=useContext(UserContext);
 const [message, setmessage] = useState("");
-const [mesageStatus, setMessageStatus] = useState(true);
+const [mesageStatus, setMessageStatus] = useState(false);
 const [errormessage, setErrormessage] = useState("");
 
 
@@ -40,7 +40,7 @@ const patientCase = {diagnosis,treatmet};
       })
       .catch((err) => {
         console.log(err)
-        setMessageStatus(false);
+        // setMessageStatus(false);
         setErrormessage(err.response.data.message);
       });
   };

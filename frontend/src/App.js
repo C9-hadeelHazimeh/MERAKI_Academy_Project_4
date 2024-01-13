@@ -8,6 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Schedule from "./components/Schedule"
 import Case from "./components/Case";
 import Clinic from "./components/Clinic"
+import Booking from "./components/Booking";
 export const UserContext = createContext();
 function App() {
   
