@@ -123,7 +123,7 @@ const Dashboard = () => {
 
 
 
-               {mesageStatus ?<><div
+      {mesageStatus ?<><div
       className="modal show"
       style={{ display: 'block', position: 'initial' }}
     >

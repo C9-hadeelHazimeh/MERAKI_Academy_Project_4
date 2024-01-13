@@ -8,14 +8,14 @@ const createPatientCase = (req, res) => {
   //determined patient
   const { patientId } = req.params;
   const newCase = new patientCase({diagnosis,treatment});
-  console.log(newCase)
+  // console.log(newCase)
   newCase
     .save()
     .then(async (result) => {
-      console.log("result",result)
+      // console.log("result",result)
       await patient.findByIdAndUpdate(
         { _id: patientId },
-        {  $push: { patientHistory: result._id} },
+        {  $push: { patientHistory: result} },
         {new:true}
       )
      
@@ -76,13 +76,13 @@ const updateHistoryById = (req, res) => {
   doctor=req.token.userId;
   const filter = req.body;
   console.log(filter)
-  Object.keys(filter).forEach((key) => {
-    filter[key].toString().replaceAll(" ", "") == "" && delete filter[key];
-  });
+  // Object.keys(filter).forEach((key) => {
+  //   filter[key].toString().replaceAll(" ", "") == "" && delete filter[key];
+  // });
   patientCase
     .findOneAndUpdate({ _id: historyId }, req.body, { new: true }).populate("doctor")
     .then((result) => {
-      console.log("Result",result)
+      // console.log("Result",result)
       if (!result) {
         return res.status(404).json({
           success: false,
