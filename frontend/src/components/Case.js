@@ -15,11 +15,13 @@ import Modal from "react-bootstrap/Modal";
 import axios from "axios";
 
 const Case = () => {
-  const [diagnosis, setDiagnosis] = useState("");
-  const [treatmet, setTreatment] = useState("");
+  const [diagnosis, setDiagnosis] = useState(null);
+  const [treatmet, setTreatment] = useState(null);
   const [patientCase, setPatientCase] = useState(false);
   const [patientId,setPatientId]=useState(false)
   const [bookedAppointments, setBookedAppointments] = useState([]);
+  const[patientHistory,setPatientHistory]=useState(null);
+  const[showPatientHistory,setshowPatientHistory]=useState(false);
   const { token } = useContext(UserContext);
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
@@ -34,8 +36,6 @@ const Case = () => {
       })
       .then((result) => {
         console.log("result.data", result);
-        //set userId with the patient id
-        // setUserId(result.data.patient);
         setBookedAppointments(result.data.appointmentDetails);
         console.log("bookedAppointments", result.data.appointmentDetails);
       })
@@ -67,6 +67,27 @@ const Case = () => {
         setErrormessage(err.response.data.message);
       });
   };
+const getpatientHistory=(patientId)=>{
+  console.log(patientId);
+  
+
+  axios
+    .get(`http://localhost:5000/cases/get/${patientId}`)
+
+    .then((result) => {
+      
+      setPatientHistory(result.data.patientHistory)
+      console.log("patientHistory",result.data.patientHistory)
+      setMessageStatus(true);
+      setmessage(result.data.message);
+
+    })
+    .catch((err) => {
+      console.log(err);
+      setMessageStatus(false);
+      setErrormessage(err.response.data.message);
+    });
+};
 
   return (
     <div className="container">
@@ -95,6 +116,16 @@ const Case = () => {
               fill patient Case
             </Button>
 
+            <Button
+              variant="primary"
+              onClick={() => {
+                
+
+              }}
+            >
+              update patient case
+            </Button>
+
             {patientCase ? (
               <>
                 <Form>
@@ -108,7 +139,7 @@ const Case = () => {
                         placeholder="The diagnosis..."
                         onChange={(e) => {
                           setDiagnosis(e.target.value);
-                          console.log(diagnosis);
+                          // console.log(diagnosis);
                         }}
                       />
                     </Col>
@@ -128,7 +159,7 @@ const Case = () => {
                         placeholder="Treatment..."
                         onChange={(e) => {
                           setTreatment(e.target.value);
-                          console.log(treatmet);
+                          // console.log(treatmet);
                         }}
                       />
                     </Col>
@@ -147,10 +178,36 @@ const Case = () => {
             >
               add to patient History
             </Button>
+
+            
+            <Button
+              variant="primary"
+              onClick={() => {
+                setPatientId(bookAppointment.patient._id)
+                getpatientHistory(patientId)
+                setshowPatientHistory(true)
+              }}
+            >
+               get patient history
+            </Button>
+           
+           {showPatientHistory?<>
+           {patientHistory.map((elem)=>{
+return elem._id
+           })
+
+           }
+            
+           
+           
+           </>:<></>}
+
+
+
           </div>
         );
       })}
-      {/* {mesageStatus ? <p>{message}</p> : <p>{errormessage}</p>} */}
+      {mesageStatus ? <p>{message}</p> : <p>{errormessage}</p>}
     </div>
   );
 };

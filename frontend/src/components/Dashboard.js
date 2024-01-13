@@ -92,38 +92,7 @@ const Dashboard = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-
-        {availableAppointments.map((availableAppointment, i) => {
-          return (
-            <div className="container">
-              <Card style={{ width: "18rem" }}>
-                <Card.Header>Available Appointment </Card.Header>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>{availableAppointment.clinic}</ListGroup.Item>
-                  <ListGroup.Item>
-                    {availableAppointment.doctor.name}
-                  </ListGroup.Item>
-                  <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
-                  <ListGroup.Item>{availableAppointment.time}</ListGroup.Item>
-                </ListGroup>
-                {/* {userId?Patient:""} */}
-
-                <Button
-                  variant="primary"
-                  onClick={() => {
-                    BookAppointemts(availableAppointment._id);
-                  }}
-                >
-                  Book this appointment
-                </Button>
-              </Card>
-
-
-
-
-
-
-      {mesageStatus ?<><div
+        {mesageStatus ?<><div
       className="modal show"
       style={{ display: 'block', position: 'initial' }}
     >
@@ -149,22 +118,41 @@ const Dashboard = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={()=>{<div
-          className="modal show"
-          style={{ display: 'block', position: 'initial' }}
-          
-          >{message}</div>     //modal show  disaplay none
-          }}>
+          <Button variant="secondary" >
             Close</Button>
           
         </Modal.Footer>
       </Modal.Dialog>
     </div></>} 
+        {availableAppointments.map((availableAppointment, i) => {
+          return (
+            <div className="container">
+              <Card style={{ width: "18rem" }}>
+                <Card.Header>Available Appointment </Card.Header>
+                <ListGroup variant="flush">
+                  <ListGroup.Item>{availableAppointment.clinic}</ListGroup.Item>
+                  <ListGroup.Item>
+                    {availableAppointment.doctor.name}
+                  </ListGroup.Item>
+                  <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
+                  <ListGroup.Item>{availableAppointment.time}</ListGroup.Item>
+                </ListGroup>
+                {/* {userId?Patient:""} */}
 
-              
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    BookAppointemts(availableAppointment._id);
+                  }}
+                >
+                  Book this appointment
+                </Button>
+              </Card> 
             </div>
           ) 
         })}
+
+
         
     </div>
   );

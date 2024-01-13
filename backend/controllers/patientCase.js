@@ -12,7 +12,7 @@ const createPatientCase = (req, res) => {
   newCase
     .save()
     .then(async (result) => {
-      // console.log("result",result)
+      console.log("result",result)
       await patient.findByIdAndUpdate(
         { _id: patientId },
         {  $push: { patientHistory: result} },
