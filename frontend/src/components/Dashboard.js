@@ -163,9 +163,9 @@ const Dashboard = () => {
 
               
             </div>
-          );
+          ) 
         })}
-     
+        
     </div>
   );
 };

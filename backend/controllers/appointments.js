@@ -172,7 +172,7 @@ const getBookedAppointment = async (req, res) => {
       })
       .populate('patient','name'); 
 
-    console.log(bookedAppointment);
+    // console.log(bookedAppointment);
 
     if (bookedschedule.length) {
       return res.status(200).json({
