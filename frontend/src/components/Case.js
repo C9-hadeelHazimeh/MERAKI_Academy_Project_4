@@ -10,10 +10,12 @@ import Row from "react-bootstrap/Row";
 import { UserContext } from "../App";
 
 import axios from "axios";
+
 const Case = () => {
   
 const[diagnosis,setDiagnosis]=useState("");
 const [treatmet,setTreatment]=useState("");
+const [patientId,setPatientId]=useState("")
 const {token}=useContext(UserContext);
 const [message, setmessage] = useState("");
 const [mesageStatus, setMessageStatus] = useState(false);
@@ -35,12 +37,13 @@ const patientCase = {diagnosis,treatmet};
         console.log(result)
         setMessageStatus(true);
         setmessage(result.data.message); 
+        setPatientId(result.data.patient)
         // setDiagnosis(result.data.patientHistory.diagnosis)
        
       })
       .catch((err) => {
         console.log(err)
-        // setMessageStatus(false);
+        setMessageStatus(false);
         setErrormessage(err.response.data.message);
       });
   };
@@ -88,8 +91,8 @@ const patientCase = {diagnosis,treatmet};
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            {}
-            <Button onClick={handlePatientCase("659c1e0a6497cdf283b73d8a")}>Add Patient Case</Button>
+            
+            <Button onClick={handlePatientCase(patientId)}>Add Patient Case</Button>
           </Col>
         </Form.Group>
       </Form>

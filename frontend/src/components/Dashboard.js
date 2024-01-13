@@ -149,7 +149,11 @@ const Dashboard = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={()=>{//modal show  disaplay none
+          <Button variant="secondary" onClick={()=>{<div
+          className="modal show"
+          style={{ display: 'none'}}
+          
+          >{message}</div>     //modal show  disaplay none
           }}>
             Close</Button>
           

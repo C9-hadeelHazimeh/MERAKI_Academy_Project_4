@@ -6,6 +6,8 @@ const patientCaseSchema = new mongoose.Schema({
   // diagnosisDate:{type: mongoose.Schema.Types.ObjectId, ref: "Appointments"},
   diagnosis:[{type: String}],
   treatment:[{type: String}],
+  //appointment
+  appointment:{type:mongoose.Schema.Types.ObjectId, ref: "Appointment" }
 });
 
 module.exports = mongoose.model("PatientCase", patientCaseSchema);
