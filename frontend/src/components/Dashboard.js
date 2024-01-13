@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -8,7 +8,7 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/esm/Button';
-
+export bookingContext=createContext();
 const Dashboard = () => {
    
     const [availableAppointments, setAvailableAppointments] = useState([]);
@@ -16,7 +16,10 @@ const Dashboard = () => {
     const [userId, setUserId] = useState("");
     const { token } = useContext(UserContext);
     const [Patient,setPatient]=useState("");
-    const [message,setMessage]=useState("")
+    const [message, setmessage] = useState("");
+    const [mesageStatus, setMessageStatus] = useState(false);
+    const [errormessage, setErrormessage] = useState("");
+    
     //get All availableAppointments (scheduled in database)
     useEffect(() => {
       axios
@@ -33,6 +36,7 @@ const Dashboard = () => {
         //   console.log(availableAppointments)
         })
         .catch((err) => {
+          // setErrormessage()
           console.log(err);
         });
     }, []);
@@ -48,9 +52,12 @@ const Dashboard = () => {
     console.log(result)
     setPatient(result.data.appointment.patient);
      console.log("patient",Patient,"userId",userId)
-     setMessage(result.data.message)
+     setMessageStatus(true)
+     setmessage(result.data.message)
     }).catch((err)=>{
-     console.log(err)
+    //  setMessageStatus(false);
+    console.log(err)
+ setErrormessage(err.response.data.message)
     })
 
 
@@ -99,6 +106,9 @@ const Dashboard = () => {
     }}>
         Book this appointment</Button>
     </Card>
+    
+    {/* {mesageStatus ? <p>{message}</p> : <p>{errormessage}</p>} */}
+
     {/* <p>{message}</p> */}
         {/* <div></div>
          <div>{availableAppointment.doctor.name}</div> 

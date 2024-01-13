@@ -8,7 +8,7 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import DatePicker from 'react-datepicker';
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -57,8 +57,9 @@ return (
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Nav.Link><Link to="/schedule">my Schdule</Link></Nav.Link>
+          <Nav.Link><Link to="/schedule">my Schedule</Link></Nav.Link>
           <Nav.Link><Link to="/patientCase">Add patient Case</Link></Nav.Link>
+          <Nav.Link><Link to="/clinic">Add to a clinic</Link></Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
@@ -93,7 +94,12 @@ return (
         <option value="">Select Hour </option>
         <option value="8-9">8:00 AM - 9:00 AM</option>
         <option value="9-10">9:00 AM - 10:00 AM</option>
-       
+        <option value="10-11">10:00 AM - 11:00 AM</option>
+        <option value="11-12">11:00 AM - 12:00 AM</option>
+        <option value="12-01">12:00 AM - 1:00 AM</option>
+        <option value="01-02">1:00 AM - 2:00 AM</option>
+        <option value="02-03">2:00 AM - 3:00 AM</option>
+        <option value="03-04">3:00 AM - 4:00 AM</option>
       </Form.Select>
 
      <Form.Select value={clinic} onChange={(e) => setClinic(e.target.value)}>

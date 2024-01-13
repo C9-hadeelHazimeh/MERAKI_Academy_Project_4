@@ -24,6 +24,7 @@ const createPatientCase = (req, res) => {
         message: "diagnosis and treatment are created",
         doctor:doctor,
         patientHistory: result,
+        patient:patientId
         // doctorName:result.doctor
       });
     })

@@ -15,6 +15,10 @@ const Case = () => {
 const[diagnosis,setDiagnosis]=useState("");
 const [treatmet,setTreatment]=useState("");
 const {token}=useContext(UserContext);
+const [message, setmessage] = useState("");
+const [mesageStatus, setMessageStatus] = useState(true);
+const [errormessage, setErrormessage] = useState("");
+
 
 const handlePatientCase=(patientId)=>{
 console.log(patientId)
@@ -29,15 +33,15 @@ const patientCase = {diagnosis,treatmet};
 
       .then((result) => {
         console.log(result)
-        // setMessageStatus(true);
-        // setmessage(result.data.message); 
-        //store the token in local storage
+        setMessageStatus(true);
+        setmessage(result.data.message); 
+        // setDiagnosis(result.data.patientHistory.diagnosis)
        
       })
       .catch((err) => {
         console.log(err)
-        // setMessageStatus(false);
-        // setErrormessage(err.response.data.message);
+        setMessageStatus(false);
+        setErrormessage(err.response.data.message);
       });
   };
 
@@ -84,13 +88,14 @@ const patientCase = {diagnosis,treatmet};
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
+            {}
             <Button onClick={handlePatientCase("659c1e0a6497cdf283b73d8a")}>Add Patient Case</Button>
           </Col>
         </Form.Group>
       </Form>
 
-      {/* {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>}
-      {isLoggedIn ? <div>welcome</div> : <p>you are not logged In</p>} */}
+      {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>}
+     
     </div>
     
   )

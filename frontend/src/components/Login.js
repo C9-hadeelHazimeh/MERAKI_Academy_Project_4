@@ -13,7 +13,7 @@ const Login = () => {
   const [email, setemail] = useState("");
   const [password, setPassword] = useState(0);
   const [message, setmessage] = useState("");
-  const [mesageStatus, setMessageStatus] = useState(true);
+  const [mesageStatus, setMessageStatus] = useState(false);
   const [errormessage, setErrormessage] = useState("");
   const [Role, setRole] = useState("");
   const { token, isLoggedIn, setIsLoggedIn, setToken } =
