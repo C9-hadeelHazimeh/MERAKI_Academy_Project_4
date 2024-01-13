@@ -1,6 +1,7 @@
 // const appointment = require("../models/appointment");
 const appointmentsModel = require("../models/appointment");
 const scheduleModel = require("../models/schedule");
+const User=require("../models/users")
 
 const schedule = async (req, res) => {
   const doctorId = req.token.userId;
@@ -114,7 +115,7 @@ const bookAppointment = async (req, res) => {
 
   const filter = { _id: scheduleId };
   const update = { isBooked: true };
-
+ 
   //find shcedulemodel=>find (scheduleid)if (isBooked=true) =>Appointment is already booked
   //else save the appointment
 
@@ -132,6 +133,7 @@ const bookAppointment = async (req, res) => {
     .save()
     .then(async (result) => {
       //console.log("patient",result)
+      //await User.findByIdAndUpdate(patient, { $push: { appointments: result._id } });
       await scheduleModel.findOneAndUpdate(filter, update);
       res.status(201).json({
         success: true,
@@ -149,8 +151,58 @@ const bookAppointment = async (req, res) => {
     });
 };
 
+const getBookedAppointment = async (req, res) => {
+  const doctorId = req.token.userId;
+
+  try {
+    const bookedschedule = await scheduleModel.find({ isBooked: true, doctor: doctorId });
+    //bookedschedule.map(schedule => schedule._id)
+    const bookedAppointment = await appointmentsModel
+      .find({ schedule: { $in:  bookedschedule.map((sechdule)=>{
+        return sechdule._id
+      })}})
+     
+      .populate({
+        path: 'schedule',
+        populate: {
+          path: 'doctor',
+          model: 'User',
+          select: 'name',
+        },
+      })
+      .populate('patient','name'); 
+
+    console.log(bookedAppointment);
+
+    if (bookedschedule.length) {
+      return res.status(200).json({
+        success: true,
+        message: 'Your booked appointments',
+        appointmentDetails: bookedAppointment,
+      });
+    }
+
+    res.status(409).json({
+      success: false,
+      message: 'No appointments available',
+    });
+  } catch (err) {
+    res.status(500).json({
+      success: false,
+      message: 'Server Error',
+      error: err.message,
+    });
+  }
+};
+
+
+
+
+
+
 module.exports = {
   bookAppointment,
   schedule,
   getAvailableAppointment,
+  getBookedAppointment
 };

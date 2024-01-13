@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useContext } from 'react';
 import Form from "react-bootstrap/Form";
@@ -21,13 +21,32 @@ const [message, setmessage] = useState("");
 const [mesageStatus, setMessageStatus] = useState(false);
 const [errormessage, setErrormessage] = useState("");
 
+useEffect(() => {
+  axios
+    .get(`http://localhost:5000/appointments/getBooked`, {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+    .then((result) => {
+      console.log("result.data.sechdule", result.data);
+      //set userId with the patient id
+      // setUserId(result.data.patient);
+      // setAvailableAppointments(result.data.sechdule);
+      
+    })
+    .catch((err) => {
+      
+      console.log(err);
 
+    });
+}, []);
 const handlePatientCase=(patientId)=>{
 console.log(patientId)
 const patientCase = {diagnosis,treatmet};
 
   axios
-      .post(`http://localhost:5000/cases/create/${patientId}`, patientCase, {
+      .post(`http://localhost:5000/cases/create`, patientCase, {
         headers: {
           authorization: `Bearer ${token}`,
         },
@@ -92,7 +111,7 @@ const patientCase = {diagnosis,treatmet};
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
             
-            <Button onClick={handlePatientCase(patientId)}>Add Patient Case</Button>
+            <Button onClick={handlePatientCase}>Add Patient Case</Button>
           </Col>
         </Form.Group>
       </Form>
