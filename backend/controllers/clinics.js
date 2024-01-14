@@ -30,7 +30,10 @@ const addnewDoctor = async (req, res) => {
       success: false,
       message: "the doctor is already registered at this clinic ",
     });
-  }
+   }
+  // const DoctorName=clinicModel.findById({_id:doctor})
+  //  console.log(DoctorName);
+  
   newDoctor
     .save()
     .then((result) => {
@@ -39,6 +42,7 @@ const addnewDoctor = async (req, res) => {
         success: true,
         message: "doctor Added successfully",
         clinicInfo: result,
+        doctor:doctor
       });
     })
     .catch((err) => {
@@ -48,7 +52,7 @@ const addnewDoctor = async (req, res) => {
         Error: err.message,
       });
     });
-};
+}
 const getAllClinics = (req, res) => {
   const userId = req.token.userId;
   clinicModel

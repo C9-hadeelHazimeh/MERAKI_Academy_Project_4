@@ -86,7 +86,7 @@ const Dashboard = () => {
                   <Link to="/login">Book an appointment</Link>
                 </Nav.Link>
                 <Nav.Link>
-                  <Link to="/register">patient History</Link>
+                  <Link to="/getclinic"> Clinics</Link>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>

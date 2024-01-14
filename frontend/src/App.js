@@ -10,6 +10,7 @@ import Case from "./components/Case";
 import Clinic from "./components/Clinic"
 import Booking from "./components/Booking";
 import LogOut from "./components/LogOut";
+import GetClinic from "./components/GetClinic";
 export const UserContext = createContext();
 function App() {
   
@@ -30,6 +31,7 @@ function App() {
       <Route path="/schedule" element={<Schedule/>}/>
       <Route path="/patientCase" element={<Case/>}/>
       <Route path="/clinic" element={<Clinic/>}/>
+      <Route path="/getclinic" element={<GetClinic/>}/>
       {/* <Route path="/logout" element={<LogOut/>}/> */}
       </Routes> 
       </UserContext.Provider>

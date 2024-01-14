@@ -27,8 +27,6 @@ const newAvailableAppointemt=()=>{
 
   const appointment = {clinic,date,time};
 
-// console.log("Submitted:", appointment);
-
    axios.post(`http://localhost:5000/appointments/book`,appointment, {
       headers: {
         authorization: `Bearer ${token}`,
