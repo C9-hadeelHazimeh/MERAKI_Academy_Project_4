@@ -8,11 +8,10 @@ import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
- 
+import Modal from 'react-bootstrap/Modal';
 const Schedule = () => {
   const [clinic,setClinic]=useState(null);
   const [date,setDate]=useState(null);
@@ -21,7 +20,7 @@ const Schedule = () => {
   const [message,setMessage]=useState("");
   const [errorMessage,setErrorMessage]=useState("");
   const [messageStatus,setMessageStatus]=useState(false);
-
+  const [showmodal,setShowModal]=useState(false)
 const {token}=useContext(UserContext)
 
 const newAvailableAppointemt=()=>{
@@ -37,13 +36,15 @@ const newAvailableAppointemt=()=>{
     }).then((result)=>{
       // console.log(result)
       setMessageStatus(true);
-       setMessage(result.data.message)
+       setMessage(result.data.message);
+       setShowModal(true);
         
      
       }).catch((err)=>{
       //  console.log(err)
        setMessageStatus(false);
       setErrorMessage(err.response.data.message);
+      setShowModal(true);
       })
       }
 
@@ -67,7 +68,21 @@ return (
     </Navbar> 
     </Form>
        
+    {showmodal && (
+    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
+      <Modal.Dialog>
+        <Modal.Body>
+          {messageStatus? <p>{message}</p>:<p>{errorMessage}</p>}
+        </Modal.Body>
 
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </div>
+  )}
   <Form>
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm={2}>
@@ -112,12 +127,15 @@ return (
       </Form.Select> 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button onClick={newAvailableAppointemt}>Add to the sechdule</Button>
+            <Button onClick={newAvailableAppointemt}
+              
+              
+              >Add to the sechdule</Button>
           </Col>
         </Form.Group>
       </Form> 
  
-{messageStatus?<p>{message}</p>:<p>{errorMessage}</p>}
+{/* {messageStatus?<p>{message}</p>:<p>{errorMessage}</p>} */}
 
 </div>
 )

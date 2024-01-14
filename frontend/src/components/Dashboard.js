@@ -20,7 +20,7 @@ const Dashboard = () => {
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
   const [errormessage, setErrormessage] = useState("");
-
+  const [showmodal,setShowModal]=useState(false)
   //get All availableAppointments (scheduled in database)
   useEffect(() => {
     axios
@@ -92,38 +92,21 @@ const Dashboard = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        {mesageStatus ?<><div
-      className="modal show"
-      style={{ display: 'block', position: 'initial' }}
-    >
+        {showmodal && (
+    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
       <Modal.Dialog>
-       <Modal.Body>
-          <p>{message}</p>
+        <Modal.Body>
+          {mesageStatus ? <p>{message}</p>:<p>{errormessage}</p>}
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={()=>{//modal show  disaplay none
-          }}>
-            Close</Button>
-          
+          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+            Close
+          </Button>
         </Modal.Footer>
       </Modal.Dialog>
-    </div></> :<><div
-      className="modal show"
-      style={{ display: 'block', position: 'initial' }}
-    >
-      <Modal.Dialog>
-       <Modal.Body>
-          <p>{errormessage}</p>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" >
-            Close</Button>
-          
-        </Modal.Footer>
-      </Modal.Dialog>
-    </div></>} 
+    </div>
+  )}
         {availableAppointments.map((availableAppointment, i) => {
           return (
             <div className="container">
@@ -143,6 +126,7 @@ const Dashboard = () => {
                   variant="primary"
                   onClick={() => {
                     BookAppointemts(availableAppointment._id);
+                    setShowModal(true)
                   }}
                 >
                   Book this appointment

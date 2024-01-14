@@ -23,12 +23,13 @@ const Case = () => {
   const [bookedAppointments, setBookedAppointments] = useState([]);
   const [patientHistory, setPatientHistory] = useState([]);
   const [showPatientHistory, setshowPatientHistory] = useState(false);
-
+    const [showmodal,setShowModal]=useState(false)
   const { token } = useContext(UserContext);
-  const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
+  const [message, setmessage] = useState("");
+  
   const [errormessage, setErrormessage] = useState("");
-
+  const navigate=useNavigate();
   useEffect(() => {
     axios
       .get(`http://localhost:5000/appointments/getBooked`, {
@@ -92,6 +93,27 @@ const Case = () => {
 
   return (
     <div className="container">
+    <Button onClick={() => {navigate("/schedule")}}>
+            Back to Your Dashboard
+          </Button>
+{showmodal && (
+    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
+      <Modal.Dialog>
+        <Modal.Body>
+          {mesageStatus ? <p>{message}</p>:<p>{errormessage}</p>}
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </div>
+  )}
+
+
+
       {bookedAppointments.map((bookAppointment, i) => {
         return (
           <div className="container" key={i}>
@@ -177,6 +199,7 @@ const Case = () => {
                         onClick={() => {
                           setPatientId(bookAppointment.patient._id);
                           handlePatientCase(patientId);
+                          setShowModal(true)
                         }}
                       >
                         Add to Patient History
@@ -209,7 +232,7 @@ const Case = () => {
           </div>
         );
       })}
-      {mesageStatus ? <p>{message}</p> : <p>{errormessage}</p>}
+      
     </div>
   );
 };
