@@ -16,12 +16,12 @@ import axios from "axios";
 
 const Case = () => {
   const [diagnosis, setDiagnosis] = useState(null);
-  const [treatmet, setTreatment] = useState(null);
+  const [treatment, setTreatment] = useState(null);
   const [patientCase, setPatientCase] = useState(false);
-  const [patientId,setPatientId]=useState(false)
+  const [patientId, setPatientId] = useState("");
   const [bookedAppointments, setBookedAppointments] = useState([]);
-  const[patientHistory,setPatientHistory]=useState(null);
-  const[showPatientHistory,setshowPatientHistory]=useState(false);
+  const [patientHistory, setPatientHistory] = useState([]);
+  const [showPatientHistory, setshowPatientHistory] = useState(false);
   const { token } = useContext(UserContext);
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
@@ -45,8 +45,8 @@ const Case = () => {
   }, []);
 
   const handlePatientCase = (patientId) => {
-    console.log(patientId);
-    const patientCase = {diagnosis, treatmet};
+    console.log("patientIdin post case",patientId);
+    const patientCase = { diagnosis, treatment };
 
     axios
       .post(`http://localhost:5000/cases/create/${patientId}`, patientCase, {
@@ -59,7 +59,6 @@ const Case = () => {
         console.log(result);
         setMessageStatus(true);
         setmessage(result.data.message);
-
       })
       .catch((err) => {
         console.log(err);
@@ -67,27 +66,26 @@ const Case = () => {
         setErrormessage(err.response.data.message);
       });
   };
-const getpatientHistory=(patientId)=>{
-  console.log(patientId);
-  
+  const getpatientHistory = (patientId) => {
+    console.log("patientIdinGet", patientId);
+    axios
+      .get(`http://localhost:5000/cases/get/${patientId}`)
 
-  axios
-    .get(`http://localhost:5000/cases/get/${patientId}`)
-
-    .then((result) => {
-      
-      setPatientHistory(result.data.patientHistory)
-      console.log("patientHistory",result.data.patientHistory)
-      setMessageStatus(true);
-      setmessage(result.data.message);
-
-    })
-    .catch((err) => {
-      console.log(err);
-      setMessageStatus(false);
-      setErrormessage(err.response.data.message);
-    });
-};
+      .then((result) => {
+        setPatientHistory(result.data.patientHistory);
+        console.log("patientHistory", result.data.patientHistory);
+        // result.data.patientHistory.map((elem)=>{
+        //   console.log(elem._id)
+        // }) 
+        setMessageStatus(true);
+        setmessage(result.data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+        setMessageStatus(false);
+        setErrormessage(err.response.data.message);
+      });
+  };
 
   return (
     <div className="container">
@@ -116,13 +114,7 @@ const getpatientHistory=(patientId)=>{
               fill patient Case
             </Button>
 
-            <Button
-              variant="primary"
-              onClick={() => {
-                
-
-              }}
-            >
+            <Button variant="primary" onClick={() => {}}>
               update patient case
             </Button>
 
@@ -172,38 +164,41 @@ const getpatientHistory=(patientId)=>{
             <Button
               variant="primary"
               onClick={() => {
-                setPatientId(bookAppointment.patient._id)
+                setPatientId(bookAppointment.patient._id);
                 handlePatientCase(patientId);
               }}
             >
               add to patient History
             </Button>
 
-            
             <Button
               variant="primary"
               onClick={() => {
-                setPatientId(bookAppointment.patient._id)
-                getpatientHistory(patientId)
-                setshowPatientHistory(true)
+                setPatientId(bookAppointment.patient._id);
+                getpatientHistory(patientId);
+                setshowPatientHistory(true);
               }}
             >
-               get patient history
+              get patient history
             </Button>
-           
-           {showPatientHistory?<>
-           {patientHistory.map((elem)=>{
-return elem._id
-           })
 
-           }
-            
-           
-           
-           </>:<></>}
-
-
-
+            {showPatientHistory && (
+              <>
+                {patientHistory.map((bookAppointment, i) => (
+                  <div className="container" key={i}>
+                    <Card style={{ width: "18rem" }}>
+                      <Card.Header>patient History: </Card.Header>
+                      <ListGroup variant="flush">
+                         <ListGroup.Item>
+                          Diagnosis:{patientHistory.diagnosis}
+                          Treatmet:{patientHistory.treatmet}
+                        </ListGroup.Item>
+                      </ListGroup>
+                    </Card>
+                  </div>
+                ))}
+              </>
+            )}
           </div>
         );
       })}
