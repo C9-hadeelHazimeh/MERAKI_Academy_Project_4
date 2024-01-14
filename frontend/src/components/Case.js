@@ -18,10 +18,12 @@ const Case = () => {
   const [diagnosis, setDiagnosis] = useState(null);
   const [treatment, setTreatment] = useState(null);
   const [patientCase, setPatientCase] = useState(false);
+  const [addpatientCase, setAddpatientCase] = useState([]);
   const [patientId, setPatientId] = useState("");
   const [bookedAppointments, setBookedAppointments] = useState([]);
   const [patientHistory, setPatientHistory] = useState([]);
   const [showPatientHistory, setshowPatientHistory] = useState(false);
+
   const { token } = useContext(UserContext);
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
@@ -45,7 +47,7 @@ const Case = () => {
   }, []);
 
   const handlePatientCase = (patientId) => {
-    console.log("patientIdin post case",patientId);
+    console.log("patientIdin post case", patientId);
     const patientCase = { diagnosis, treatment };
 
     axios
@@ -57,6 +59,7 @@ const Case = () => {
 
       .then((result) => {
         console.log(result);
+        setAddpatientCase(result.data.addpatientCase);
         setMessageStatus(true);
         setmessage(result.data.message);
       })
@@ -76,7 +79,7 @@ const Case = () => {
         console.log("patientHistory", result.data.patientHistory);
         // result.data.patientHistory.map((elem)=>{
         //   console.log(elem._id)
-        // }) 
+        // })
         setMessageStatus(true);
         setmessage(result.data.message);
       })
@@ -102,85 +105,87 @@ const Case = () => {
                 </ListGroup.Item>
                 <ListGroup.Item>{bookAppointment.schedule.time}</ListGroup.Item>
               </ListGroup>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setPatientId(bookAppointment.patient._id);
+                  getpatientHistory(patientId);
+                  setshowPatientHistory(true);
+                }}
+              >
+                get patient history
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  setPatientCase(true);
+                  console.log("fill patient Case");
+                }}
+              >
+                fill patient Case
+              </Button>
             </Card>
 
-            <Button
-              variant="primary"
-              onClick={() => {
-                setPatientCase(true);
-                console.log("fill patient Case");
-              }}
-            >
-              fill patient Case
-            </Button>
-
-            <Button variant="primary" onClick={() => {}}>
+            {/* <Button variant="primary" onClick={() => {}}>
               update patient case
-            </Button>
+            </Button> */}
 
-            {patientCase ? (
+            {patientCase && (
               <>
-                <Form>
-                  <Form.Group as={Row} className="mb-3">
-                    <Form.Label column sm={2}>
-                      Diagnosis
-                    </Form.Label>
-                    <Col sm={10}>
-                      <Form.Control
-                        type="text"
-                        placeholder="The diagnosis..."
-                        onChange={(e) => {
-                          setDiagnosis(e.target.value);
-                          // console.log(diagnosis);
-                        }}
-                      />
-                    </Col>
-                  </Form.Group>
+                <Card style={{ width: "30rem" }}>
+                  <Card.Header>Add Patient Case</Card.Header>
+                  <Card.Body>
+                    <Form>
+                      <Form.Group as={Row} className="mb-3">
+                        <Form.Label column sm={4}>
+                          Diagnosis:
+                        </Form.Label>
+                        <Col sm={15}>
+                          <Form.Control
+                            type="text"
+                            placeholder="The diagnosis..."
+                            onChange={(e) => {
+                              setDiagnosis(e.target.value);
+                              // console.log(diagnosis);
+                            }}
+                          />
+                        </Col>
+                      </Form.Group>
 
-                  <Form.Group
-                    as={Row}
-                    className="mb-3"
-                    controlId="formHorizontalPassword"
-                  >
-                    <Form.Label column sm={2}>
-                      Treatment
-                    </Form.Label>
-                    <Col sm={10}>
-                      <Form.Control
-                        type="text"
-                        placeholder="Treatment..."
-                        onChange={(e) => {
-                          setTreatment(e.target.value);
-                          // console.log(treatmet);
+                      <Form.Group
+                        as={Row}
+                        className="mb-3"
+                        controlId="formHorizontalPassword"
+                      >
+                        <Form.Label column sm={4}>
+                          Treatment
+                        </Form.Label>
+                        <Col sm={15}>
+                          <Form.Control
+                            type="text"
+                            placeholder="Treatment..."
+                            onChange={(e) => {
+                              setTreatment(e.target.value);
+                              // console.log(treatmet);
+                            }}
+                          />
+                        </Col>
+                      </Form.Group>
+
+                      <Button
+                        variant="primary"
+                        onClick={() => {
+                          setPatientId(bookAppointment.patient._id);
+                          handlePatientCase(patientId);
                         }}
-                      />
-                    </Col>
-                  </Form.Group>
-                </Form>
+                      >
+                        Add to Patient History
+                      </Button>
+                    </Form>
+                  </Card.Body>
+                </Card>
               </>
-            ) : (
-              <></>
             )}
-            <Button
-              variant="primary"
-              onClick={() => {
-                setPatientId(bookAppointment.patient._id);
-                handlePatientCase(patientId);
-              }}
-            >
-              add to patient History
-            </Button>
-
-            <Button
-              variant="primary"
-              onClick={() => {
-                setPatientId(bookAppointment.patient._id);
-                getpatientHistory(patientId);
-                setshowPatientHistory(true);
-              }}
-            >
-              get patient history
-            </Button>
 
             {showPatientHistory && (
               <>
@@ -189,9 +194,11 @@ const Case = () => {
                     <Card style={{ width: "18rem" }}>
                       <Card.Header>patient History: </Card.Header>
                       <ListGroup variant="flush">
-                         <ListGroup.Item>
+                        <ListGroup.Item>
                           Diagnosis:{patientHistory.diagnosis}
-                          Treatmet:{patientHistory.treatmet}
+                           </ListGroup.Item>
+                        <ListGroup.Item>
+                        Treatmet:{patientHistory.treatmet}
                         </ListGroup.Item>
                       </ListGroup>
                     </Card>
