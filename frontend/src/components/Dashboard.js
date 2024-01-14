@@ -120,7 +120,6 @@ const Dashboard = () => {
                   <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
                   <ListGroup.Item>{availableAppointment.time}</ListGroup.Item>
                 </ListGroup>
-                {/* {userId?Patient:""} */}
 
                 <Button
                   variant="primary"
