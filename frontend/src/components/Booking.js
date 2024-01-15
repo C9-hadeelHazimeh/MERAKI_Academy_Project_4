@@ -8,10 +8,14 @@ const Booking = () => {
 
   return (
     <div>
-<img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
-    
+{/* <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705348099/pexels-thirdman-5327584_cpf4va.jpg"  
+    height={400}
   alt="Logo"/>
 
+
+<img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705348357/pexels-andrea-piacquadio-3779696_z6wtx0.jpg"  
+    height={400}
+  alt="Logo"/> */}
 
     </div>
   )

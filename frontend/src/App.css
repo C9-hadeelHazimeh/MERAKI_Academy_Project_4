@@ -1,5 +1,4 @@
 .App {
-  background-color: bisque;
 }
 
 .homeHeader {
@@ -53,8 +52,21 @@
   width: 70%;
 }
 
-.Contact{
-
-
-   background-color: rgb(13, 111, 111);;
+.Contact {
+  background-color: rgb(13, 111, 111);
 }
+
+
+.slider{
+  padding:2rem;
+  width: 100%;
+}
+.slider img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover
+}
+
+
+
+

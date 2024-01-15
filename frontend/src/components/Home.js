@@ -5,9 +5,11 @@ import Navbar from 'react-bootstrap/Navbar';
  import {Link} from "react-router-dom";
  import Carousel from 'react-bootstrap/Carousel';
  import ExampleCarouselImage from "../components/Booking"
+
 const Home = () => {
   return (
-    <div className>
+    //header
+    <div>
       <div className='homeHeader'>
        <Link to="/home">
         <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
@@ -29,24 +31,42 @@ const Home = () => {
       </Container>
     </Navbar> 
     </div>
-    
+{/* slider */}
+    <div className='slider'>
     <Carousel>
-      <Carousel.Item>
-        <ExampleCarouselImage text="First slide" />
+      <Carousel.Item >
+      <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705348099/pexels-thirdman-5327584_cpf4va.jpg"  
+    
+    alt="Logo"/>
         <Carousel.Caption>
           <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <ExampleCarouselImage text="Second slide" />
+      <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705348357/pexels-andrea-piacquadio-3779696_z6wtx0.jpg"  
+    
+     />
         <Carousel.Caption>
           <h3>Second slide label</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <ExampleCarouselImage text="Third slide" />
+      <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705349551/pexels-matthias-zomer-339620_fdfjjy.jpg"
+     
+     />
+        <Carousel.Caption>
+          <h3>Third slide label</h3>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+      <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705350547/pexels-anna-shvets-5069611_jzwlz1.jpg"
+     
+     />
         <Carousel.Caption>
           <h3>Third slide label</h3>
           <p>
@@ -55,10 +75,9 @@ const Home = () => {
         </Carousel.Caption>
       </Carousel.Item>
     </Carousel> 
-  
-
-
-
+      </div>
+{/* cards */}
+{/* footer */}
 
       </div>
   )
