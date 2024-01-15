@@ -12,6 +12,7 @@ import Clinic from "./components/Clinic"
 import LogOut from "./components/LogOut";
 import GetClinic from "./components/GetClinic";
 import Booking from "./components/Booking";
+import Contact from "./components/Contact";
 export const UserContext = createContext();
 function App() {
   
@@ -39,6 +40,7 @@ function App() {
       <Route path="/getclinic" element={<GetClinic/>}/>
       <Route path="/logout" element={<LogOut/>}/>
       <Route path="/booking" element={<Booking/>}/>
+      <Route path="/contact" element={<Contact/>}/>
       </Routes> 
       </UserContext.Provider>
     </div>

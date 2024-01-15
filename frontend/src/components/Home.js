@@ -21,15 +21,15 @@ const Home = () => {
           <Nav className="me-auto">
           <Nav.Link><Link to="/login" className='link'>Login</Link></Nav.Link>
           <Nav.Link><Link to="/register" className='link'>Register</Link></Nav.Link>
-          <Nav.Link><Link to="/logout"  className='link'>LogOut</Link></Nav.Link>
-          <Nav.Link><Link to="/contact"  className='link'>Contact Us</Link></Nav.Link>
+          <Nav.Link><Link to="/logout"  className='link'>Logout</Link></Nav.Link>
+          <Nav.Link><Link to="/contact"  className='link'>Contact us</Link></Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar> 
     </div>
-    {/* 
+    
     <Carousel>
       <Carousel.Item>
         <ExampleCarouselImage text="First slide" />
@@ -54,7 +54,7 @@ const Home = () => {
           </p>
         </Carousel.Caption>
       </Carousel.Item>
-    </Carousel> */}
+    </Carousel> 
   
 
 
