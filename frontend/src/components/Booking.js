@@ -7,7 +7,13 @@ const Booking = () => {
 
 
   return (
-    <div>Booking</div>
+    <div>
+<img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
+    
+  alt="Logo"/>
+
+
+    </div>
   )
 }
 

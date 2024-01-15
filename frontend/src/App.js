@@ -11,6 +11,7 @@ import Clinic from "./components/Clinic"
 // logo from "../public/logo"
 import LogOut from "./components/LogOut";
 import GetClinic from "./components/GetClinic";
+import Booking from "./components/Booking";
 export const UserContext = createContext();
 function App() {
   
@@ -37,6 +38,7 @@ function App() {
       <Route path="/clinic" element={<Clinic/>}/>
       <Route path="/getclinic" element={<GetClinic/>}/>
       <Route path="/logout" element={<LogOut/>}/>
+      <Route path="/booking" element={<Booking/>}/>
       </Routes> 
       </UserContext.Provider>
     </div>

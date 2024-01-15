@@ -3,33 +3,33 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
  import {Link} from "react-router-dom";
-
-
+ import Carousel from 'react-bootstrap/Carousel';
+ import ExampleCarouselImage from "../components/Booking"
 const Home = () => {
-
-
-
-
-
   return (
     <div className>
-       <Link to="/home"><img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
+      <div className='homeHeader'>
+       <Link to="/home">
+        <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
     
     alt="Logo"/></Link> 
-     <Navbar expand="lg" className="bg-body-tertiary">
+     <Navbar className="bg-body-tertiary">
       <Container>
       
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Nav.Link><Link to="/login">Login</Link></Nav.Link>
-          <Nav.Link><Link to="/register">Register</Link></Nav.Link>
-          <Nav.Link><Link to="/logout">LogOut</Link></Nav.Link>
+          <Nav.Link><Link to="/login" className='link'>Login</Link></Nav.Link>
+          <Nav.Link><Link to="/register" className='link'>Register</Link></Nav.Link>
+          <Nav.Link><Link to="/logout"  className='link'>LogOut</Link></Nav.Link>
+          <Nav.Link><Link to="/contact"  className='link'>Contact Us</Link></Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar> 
+    </div>
+    {/* 
     <Carousel>
       <Carousel.Item>
         <ExampleCarouselImage text="First slide" />
@@ -54,7 +54,7 @@ const Home = () => {
           </p>
         </Carousel.Caption>
       </Carousel.Item>
-    </Carousel>
+    </Carousel> */}
   
 
 
