@@ -32,7 +32,7 @@ function App() {
       <Route path="/patientCase" element={<Case/>}/>
       <Route path="/clinic" element={<Clinic/>}/>
       <Route path="/getclinic" element={<GetClinic/>}/>
-      {/* <Route path="/logout" element={<LogOut/>}/> */}
+      <Route path="/logout" element={<LogOut/>}/>
       </Routes> 
       </UserContext.Provider>
     </div>

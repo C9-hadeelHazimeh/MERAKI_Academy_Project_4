@@ -212,16 +212,16 @@ const Case = () => {
 
             {showPatientHistory && (
               <>
-                {patientHistory.map((bookAppointment, i) => (
+                {patientHistory.map((elem, i) => (
                   <div className="container" key={i}>
                     <Card style={{ width: "18rem" }}>
                       <Card.Header>patient History: </Card.Header>
                       <ListGroup variant="flush">
                         <ListGroup.Item>
-                          Diagnosis:{patientHistory.diagnosis}
+                          Diagnosis:{elem.diagnosis}
                            </ListGroup.Item>
                         <ListGroup.Item>
-                        Treatmet:{patientHistory.treatmet}
+                        Treatmet:{elem.treatmet}
                         </ListGroup.Item>
                       </ListGroup>
                     </Card>
