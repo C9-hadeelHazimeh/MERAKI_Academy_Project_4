@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Schedule from "./components/Schedule"
 import Case from "./components/Case";
 import Clinic from "./components/Clinic"
-import Booking from "./components/Booking";
+// logo from "../public/logo"
 import LogOut from "./components/LogOut";
 import GetClinic from "./components/GetClinic";
 export const UserContext = createContext();
@@ -21,8 +21,12 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{token, setToken,isLoggedIn,setIsLoggedIn}}>
-      <h1><Link to="/home">Home</Link></h1>
+      {/* <h1><Link to="/home">Home</Link></h1> */}
     
+      {/* <Link to="/home"><img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
+    
+    alt="Logo"/></Link> */}
+
       <Routes>
       <Route path="/home" element={<Home/>}/>
       <Route path="/login" element={<Login/>}/>

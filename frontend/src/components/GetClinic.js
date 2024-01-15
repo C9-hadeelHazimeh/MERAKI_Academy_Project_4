@@ -104,10 +104,7 @@ const [clinicId,setclinicId]=useState("")
                   Doctor Name: {oneClinic.doctor.name}
                 </ListGroup.Item>
               </ListGroup>
-              <Button onClick={() =>setShowReviews(oneClinic.reviews.map((rev)=>{
-                          setShowReviews(rev._id)
-              })
-               )}>
+              <Button onClick={() =>{setShowReviews(oneClinic._id) }}>
                 Reviews
               </Button>
             </Card>
@@ -152,9 +149,8 @@ const [clinicId,setclinicId]=useState("")
           {/* { oneClinic.reviews.map((review)=>{
             return review._id
           })} */}
-          {showReviews === oneClinic.reviews.map((rev)=>{
-            return rev._id
-          })
+          { showReviews===oneClinic._id
+          
           ? (
             <Col md={4}>
               <Card style={{ width: "18rem" }}>
@@ -164,8 +160,9 @@ const [clinicId,setclinicId]=useState("")
                     <ListGroup.Item>
                        {oneReview.review}
                       </ListGroup.Item>
-                    
+                   
                   ))}
+                 
                 </ListGroup>
               </Card>
             </Col>

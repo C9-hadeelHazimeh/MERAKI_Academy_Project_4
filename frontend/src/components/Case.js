@@ -17,12 +17,12 @@ import axios from "axios";
 const Case = () => {
   const [diagnosis, setDiagnosis] = useState(null);
   const [treatment, setTreatment] = useState(null);
-  const [patientCase, setPatientCase] = useState(false);
+  const [patientCase, setPatientCase] = useState("");
   const [addpatientCase, setAddpatientCase] = useState([]);
   const [patientId, setPatientId] = useState("");
   const [bookedAppointments, setBookedAppointments] = useState([]);
   const [patientHistory, setPatientHistory] = useState([]);
-  const [showPatientHistory, setshowPatientHistory] = useState(false);
+  const [showPatientHistory, setshowPatientHistory] = useState("");
     const [showmodal,setShowModal]=useState(false)
   const { token } = useContext(UserContext);
   const [mesageStatus, setMessageStatus] = useState(false);
@@ -131,8 +131,8 @@ const Case = () => {
                 variant="primary"
                 onClick={() => {
                   setPatientId(bookAppointment.patient._id);
-                  getpatientHistory(patientId);
-                  setshowPatientHistory(true);
+                  getpatientHistory(bookAppointment.patient._id);
+                  setshowPatientHistory(bookAppointment._id);
                 }}
               >
                 get patient history
@@ -140,8 +140,8 @@ const Case = () => {
               <Button
                 variant="primary"
                 onClick={() => {
-                  setPatientCase(true);
-                  console.log("fill patient Case");
+                  setPatientCase(bookAppointment._id);
+                  
                 }}
               >
                 fill patient Case
@@ -152,7 +152,7 @@ const Case = () => {
               update patient case
             </Button> */}
 
-            {patientCase && (
+            {patientCase ===bookAppointment._id?(
               <>
                 <Card style={{ width: "30rem" }}>
                   <Card.Header>Add Patient Case</Card.Header>
@@ -197,8 +197,8 @@ const Case = () => {
                       <Button
                         variant="primary"
                         onClick={() => {
-                          setPatientId(bookAppointment.patient._id);
-                          handlePatientCase(patientId);
+                          //setPatientId(bookAppointment.patient._id);
+                          handlePatientCase(bookAppointment.patient._id);
                           setShowModal(true)
                         }}
                       >
@@ -208,9 +208,9 @@ const Case = () => {
                   </Card.Body>
                 </Card>
               </>
-            )}
+            ):""}
 
-            {showPatientHistory && (
+            {showPatientHistory===bookAppointment._id? (
               <>
                 {patientHistory.map((elem, i) => (
                   <div className="container" key={i}>
@@ -228,7 +228,7 @@ const Case = () => {
                   </div>
                 ))}
               </>
-            )}
+            ):""}
           </div>
         );
       })}

@@ -3,12 +3,19 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
  import {Link} from "react-router-dom";
-// import { login } from '../../../backend/controllers/users';
+
 
 const Home = () => {
+
+
+
+
+
   return (
-    <div className='container'>
-        
+    <div className>
+       <Link to="/home"><img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
+    
+    alt="Logo"/></Link> 
      <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
       
@@ -23,6 +30,36 @@ const Home = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar> 
+    <Carousel>
+      <Carousel.Item>
+        <ExampleCarouselImage text="First slide" />
+        <Carousel.Caption>
+          <h3>First slide label</h3>
+          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <ExampleCarouselImage text="Second slide" />
+        <Carousel.Caption>
+          <h3>Second slide label</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        </Carousel.Caption>
+      </Carousel.Item>
+      <Carousel.Item>
+        <ExampleCarouselImage text="Third slide" />
+        <Carousel.Caption>
+          <h3>Third slide label</h3>
+          <p>
+            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+          </p>
+        </Carousel.Caption>
+      </Carousel.Item>
+    </Carousel>
+  
+
+
+
+
       </div>
   )
 }

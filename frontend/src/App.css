@@ -1,5 +1,14 @@
 .App {
-  text-align: center;
+  
+
+  background-color: rgb(114, 247, 247);
+}
+ img{
+  padding: 2rem;
+  height: 250px;
+  width: 300px;
+  border-radius:35% ;
+
 }
 .container{
   padding: 2rem;
