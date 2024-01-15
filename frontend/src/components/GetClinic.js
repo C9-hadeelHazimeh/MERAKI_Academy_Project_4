@@ -8,16 +8,18 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+// import Modal from 'react-bootstrap/Modal';
 const GetClinic = () => {
   const [clinics, setClinics] = useState([]);
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
   const [errormessage, setErrormessage] = useState("");
- const [showReviews,setShowReviews]=useState(false)
+ const [showReviews,setShowReviews]=useState("")
   const { token } = useContext(UserContext);
-const  [showAddingReview,setshowAddingReview]=useState(false)
+const  [showAddingReview,setshowAddingReview]=useState("")
 const [review,setReview]=useState("")
 const [clinicId,setclinicId]=useState("")
+ const [showmodal,setShowModal]=useState(false)
   useEffect(() => {
     axios
       .get(`http://localhost:5000/clinics/get`, {
@@ -37,9 +39,10 @@ const [clinicId,setclinicId]=useState("")
 
   const handleAddingReview = (clinicId) => {
     const newReview={review};
+    console.log("clinicId",clinicId)
      axios
       .post(
-         `http://localhost:5000/review/create/${clinicId}`,
+         `http://localhost:5000/clinics/review/create/${clinicId}`,
         newReview,
         {
           headers: {
@@ -69,7 +72,24 @@ const [clinicId,setclinicId]=useState("")
     
     <div className="reviews">
 
-<div className="reviews">
+<div className="container">
+{showmodal && (
+    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
+      <Modal.Dialog>
+        <Modal.Body>
+          {mesageStatus ? <p>{message}</p>:<p>{errormessage}</p>}
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal.Dialog>
+    </div>
+  )}
+
+
       {clinics.map((oneClinic) => (
         <Row >
           <Col md={4}>
@@ -84,17 +104,20 @@ const [clinicId,setclinicId]=useState("")
                   Doctor Name: {oneClinic.doctor.name}
                 </ListGroup.Item>
               </ListGroup>
-              <Button onClick={() => setShowReviews(true)}>
+              <Button onClick={() =>setShowReviews(oneClinic.reviews.map((rev)=>{
+                          setShowReviews(rev._id)
+              })
+               )}>
                 Reviews
               </Button>
             </Card>
           </Col>
           
             <Button 
-            onClick={()=>{setshowAddingReview(true)}}
+            onClick={()=>{setshowAddingReview(oneClinic._id)}}
             >Add a review</Button> 
            
-           {showAddingReview&& (
+           {showAddingReview===oneClinic._id? (
             <>
            <Form.Group as={Row} className="mb-3">
            <Form.Label column sm={2}>
@@ -113,9 +136,9 @@ const [clinicId,setclinicId]=useState("")
            <Button
            onClick={()=>{
             console.log("addReview")
-            setclinicId(oneClinic._id)
-            handleAddingReview(clinicId)
-
+            // setclinicId()
+            handleAddingReview(oneClinic._id)
+           setShowModal(true)
            }}
            
            >Submit</Button>
@@ -124,9 +147,15 @@ const [clinicId,setclinicId]=useState("")
            
          </>
 
-           )}
+           ):""}
           
-          {showReviews && (
+          {/* { oneClinic.reviews.map((review)=>{
+            return review._id
+          })} */}
+          {showReviews === oneClinic.reviews.map((rev)=>{
+            return rev._id
+          })
+          ? (
             <Col md={4}>
               <Card style={{ width: "18rem" }}>
                 <Card.Header>Reviews</Card.Header>
@@ -140,12 +169,12 @@ const [clinicId,setclinicId]=useState("")
                 </ListGroup>
               </Card>
             </Col>
-          )}
+          ):""}
 
           
         </Row>
       ))}
-      <p>{message}</p>
+      
     </div>
       
     </div>
