@@ -13,7 +13,11 @@ import LogOut from "./components/LogOut";
 import GetClinic from "./components/GetClinic";
 import Booking from "./components/Booking";
 import Contact from "./components/Contact";
+import About from "./About";
+
+
 export const UserContext = createContext();
+
 function App() {
   
   const [token, setToken] = useState(localStorage.getItem("token"));//local Storage
@@ -47,6 +51,14 @@ function App() {
                     Home
                   </Link>
                 </Nav.Link>
+
+                <Nav.Link>
+                  <Link to="/about" className="link">
+                   About
+                  </Link>
+                </Nav.Link>
+
+
                 <Nav.Link>
                   <Link to="/login" className="link">
                     Login
@@ -85,6 +97,7 @@ function App() {
       <Route path="/logout" element={<LogOut/>}/>
       <Route path="/booking" element={<Booking/>}/>
       <Route path="/contact" element={<Contact/>}/>
+      <Route path="/about" element={<About/>}/>
       </Routes> 
       </UserContext.Provider>
     </div>

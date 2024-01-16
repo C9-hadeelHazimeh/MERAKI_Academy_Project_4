@@ -1,7 +1,10 @@
 .App {
-
+  background-color: rgb(248, 231, 210);
 }
-
+.about {
+  background-color: rgb(248, 231, 210);
+  min-height: 100vh;
+}
 .homeHeader {
   display: flex;
   align-items: center;
@@ -37,7 +40,7 @@
   margin-right: 15px;
   font-size: large;
   font-weight: bold;
-  color:whitesmoke;
+  color: whitesmoke;
   text-decoration: none;
 }
 .contactInfo {
@@ -57,39 +60,58 @@
   background-color: rgb(13, 111, 111);
 }
 
-
-.slider{
-  padding:2rem;
+.slider {
+  padding: 2rem;
   width: 100%;
 }
-.slider img{
+.slider img {
   height: 100%;
   width: 100%;
-  object-fit: cover
+  object-fit: cover;
 }
 
 .icons {
   display: flex;
-justify-content: center;
-align-Items: center;
-color:rgb(13, 111, 111);
-
-
+  justify-content: center;
+  align-items: center;
+  color: rgb(13, 111, 111);
 }
-.icons :on-hover{
-
+.icons :on-hover {
+  color: brown;
 }
 
-.cardText{
+.cardText {
   font-size: large;
-   text-align: justify;
+  text-align: justify;
   text-align: center;
-  
   font-weight: bold;
 }
-.my-4{
+.my-5 {
   height: 100%;
   width: 100%;
+  padding: 2rem;
+  background-color: rgb(13, 111, 111);
+color: whitesmoke;
 }
 
+.media {
+  margin-left: 20%;
 
+  display: flex;
+  gap: 20px;
+}
+.d-flex flex-column{
+  
+    display: flex;
+    flex-direction: column;
+
+}
+
+.custom-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-col .card {
+  flex: 1;
+}
