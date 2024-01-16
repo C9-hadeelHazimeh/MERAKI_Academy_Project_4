@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
+import { Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -221,9 +222,16 @@ const Register = () => {
       {messageStatus ? (
         <>
           <h5>{message}</h5>
+      
+       
 
-          <Form.Group as={Row} className="mb-3">
-            <Col sm={{ span: 10, offset: 2 }}>
+           <Container>
+          <Row>
+            <Col>
+          <p>already have an account?</p>
+          </Col>
+            <Col>
+             
               <Button
                 type="submit"
                 onClick={() => {
@@ -233,7 +241,8 @@ const Register = () => {
                 Login
               </Button>
             </Col>
-          </Form.Group>
+            </Row>
+          </Container> 
         </>
       ) : (
         <div>{errormessage}</div>

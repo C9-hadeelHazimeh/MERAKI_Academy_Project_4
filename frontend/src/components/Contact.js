@@ -56,16 +56,22 @@ const Contact = () => {
             </Button>
           </Form>
         </Col>
-
+        
+      {/* <Button variant="primary" type="submit">
+              Back to Home
+            </Button> */}
+            
         <Col  className='contactInfo' md={6}>
           
           <p>Contact us at:</p>
           <p>Email: hadeel.f.hazaimeh@gmail.com</p>
           <p>Phone: +962 775988980</p>
         </Col>
+       
       </Row>
+     
     </Container>
-
+ 
 
 
 

@@ -8,7 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Schedule from "./components/Schedule"
 import Case from "./components/Case";
 import Clinic from "./components/Clinic"
-// logo from "../public/logo"
+import {Nav,Navbar,Row,Col,Card,Carousel,Container} from "react-bootstrap";
 import LogOut from "./components/LogOut";
 import GetClinic from "./components/GetClinic";
 import Booking from "./components/Booking";
@@ -23,11 +23,55 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{token, setToken,isLoggedIn,setIsLoggedIn}}>
-      {/* <h1><Link to="/home">Home</Link></h1> */}
-    
-      {/* <Link to="/home"><img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"  
-    
-    alt="Logo"/></Link> */}
+       {/* <Link  to="/home">
+          <img
+          className="logo"
+            src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"
+            alt="Logo"
+          />
+        </Link>  */}
+        <div className="homeHeader">
+        <Link to="/home">
+          <img
+            src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"
+            alt="Logo"
+          />
+        </Link>
+        <Navbar className="bg-body-tertiary">
+          <Container>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+              <Nav.Link>
+                  <Link to="/home" className="link">
+                    Home
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link to="/login" className="link">
+                    Login
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link to="/register" className="link">
+                    Register
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link to="/logout" className="link">
+                    Logout
+                  </Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link to="/contact" className="link">
+                    Contact us
+                  </Link>
+                </Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </div>
 
       <Routes>
       <Route path="/home" element={<Home/>}/>
