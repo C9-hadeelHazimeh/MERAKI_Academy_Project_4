@@ -66,8 +66,7 @@ const Register = () => {
 
   return (
     <div className="container">
-      {/* <RoleContext.Provider value={{role,setRole}}> */}
-      Register
+    
       <Form>
         <Form.Group
           as={Row}
@@ -75,7 +74,7 @@ const Register = () => {
           controlId="formHorizontalPassword"
         >
           <Form.Label column sm={2}>
-            name
+            Name
           </Form.Label>
           <Col sm={10}>
             <Form.Control
@@ -128,7 +127,7 @@ const Register = () => {
           controlId="formHorizontalPassword"
         >
           <Form.Label column sm={2}>
-            age
+            Age
           </Form.Label>
           <Col sm={10}>
             <Form.Control
@@ -213,7 +212,7 @@ const Register = () => {
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button type="submit" onClick={createNewUser}>
+            <Button  className="button" type="submit" onClick={createNewUser}>
               Register
             </Button>
           </Col>
@@ -225,14 +224,15 @@ const Register = () => {
       
        
 
-           <Container>
-          <Row>
-            <Col>
-          <p>already have an account?</p>
-          </Col>
-            <Col>
+          <hr />
+          
+            
+          <p>Already have an account?</p>
+          
+            
              
               <Button
+              className="button"
                 type="submit"
                 onClick={() => {
                   navigate("/login");
@@ -240,9 +240,9 @@ const Register = () => {
               >
                 Login
               </Button>
-            </Col>
-            </Row>
-          </Container> 
+           
+           
+         
         </>
       ) : (
         <div>{errormessage}</div>

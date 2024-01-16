@@ -74,7 +74,8 @@ return (
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+
+          <Button   onClick={() => {setShowModal(false)}}>
             Close
           </Button>
         </Modal.Footer>
@@ -125,7 +126,7 @@ return (
       </Form.Select> 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button onClick={newAvailableAppointemt}
+            <Button className='button'  onClick={newAvailableAppointemt}
               
               
               >Add to the sechdule</Button>

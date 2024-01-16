@@ -93,7 +93,7 @@ const Case = () => {
 
   return (
     <div className="container">
-    <Button onClick={() => {navigate("/schedule")}}>
+    <Button  className="button" onClick={() => {navigate("/schedule")}}>
             Back to Your Dashboard
           </Button>
 {showmodal && (
@@ -104,7 +104,7 @@ const Case = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+          <Button className="button" variant="secondary" onClick={() => {setShowModal(false)}}>
             Close
           </Button>
         </Modal.Footer>
@@ -128,6 +128,7 @@ const Case = () => {
                 <ListGroup.Item>{bookAppointment.schedule.time}</ListGroup.Item>
               </ListGroup>
               <Button
+              className="button"
                 variant="primary"
                 onClick={() => {
                   setPatientId(bookAppointment.patient._id);
@@ -138,6 +139,7 @@ const Case = () => {
                 get patient history
               </Button>
               <Button
+              className="button"
                 variant="primary"
                 onClick={() => {
                   setPatientCase(bookAppointment._id);
@@ -195,6 +197,7 @@ const Case = () => {
                       </Form.Group>
 
                       <Button
+                      className="button"
                         variant="primary"
                         onClick={() => {
                           //setPatientId(bookAppointment.patient._id);

@@ -26,10 +26,9 @@
 .navBar{
 
 margin: 2rem;
-  width: 50%;
-  /* height: 50%; */
-  background-color: rgb(17, 16, 16);
-
+  width: fit-content;
+  height: 100%;
+  background-color: rgb(13, 111, 111);
 
 }
 .nav-link {
@@ -52,6 +51,7 @@ margin: 2rem;
   color: whitesmoke;
   text-decoration: none;
 }
+
 .contactInfo {
   padding-left: 30px;
   padding-top: 50px;
@@ -128,3 +128,15 @@ color: whitesmoke;
 .custom-col .card {
   flex: 1;
 }
+.cardContainer{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  
+}
+.button{
+  background-color: rgb(13, 111, 111); 
+  font-size: large;width: 20%;
+  font-weight: bold;
+  color: whitesmoke;
+  }

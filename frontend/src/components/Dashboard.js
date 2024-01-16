@@ -69,12 +69,12 @@ const Dashboard = () => {
     <div>
         
              <Navbar expand="lg" className="navBar">
-          <Container>
+          
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
               <Nav.Link >
-                  <Link  className="link" to="/dashboard">Dashboard</Link>
+                  <Link  className="link" to="/dashboard">Available appointments</Link>
                 </Nav.Link>
                 <Nav.Link>
                   <Link className="link" to="/login">Book an appointment</Link>
@@ -84,7 +84,7 @@ const Dashboard = () => {
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
-          </Container>
+          
         </Navbar> 
      
 
@@ -96,28 +96,30 @@ const Dashboard = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
+          <Button  className="button" variant="secondary" onClick={() => {setShowModal(false)}}>
             Close
           </Button>
         </Modal.Footer>
       </Modal.Dialog>
     </div>
   )}
+  <Container className="cardContainer">
         {availableAppointments.map((availableAppointment, i) => {
           return (
-            <div className="container">
-              <Card style={{ width: "18rem" }}>
+            
+              <Card style={{ width: '17rem', margin: '5x' }}>
                 <Card.Header>Available Appointment </Card.Header>
                 <ListGroup variant="flush">
-                  <ListGroup.Item>{availableAppointment.clinic}</ListGroup.Item>
+                  <ListGroup.Item> Clinic: {availableAppointment.clinic}</ListGroup.Item>
                   <ListGroup.Item>
-                    {availableAppointment.doctor.name}
+                   Doctor Name: {availableAppointment.doctor.name}
                   </ListGroup.Item>
-                  <ListGroup.Item>{availableAppointment.date}</ListGroup.Item>
-                  <ListGroup.Item>{availableAppointment.time}</ListGroup.Item>
+                  <ListGroup.Item> Date: {availableAppointment.date}</ListGroup.Item>
+                  <ListGroup.Item> Time: {availableAppointment.time}</ListGroup.Item>
                 </ListGroup>
 
-                <Button
+                <Button 
+                className="button"
                   variant="primary"
                   onClick={() => {
                     BookAppointemts(availableAppointment._id);
@@ -127,10 +129,10 @@ const Dashboard = () => {
                   Book this appointment
                 </Button>
               </Card> 
-            </div>
+           
           ) 
         })}
-
+ </Container>
 
         
     </div>

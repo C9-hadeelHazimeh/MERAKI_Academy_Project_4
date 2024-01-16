@@ -68,8 +68,8 @@ const Login = () => {
   };
 
   return (
-    <div className="container">
-      <Form>
+    <div className="about">
+      <Form className="container">
         <Form.Group as={Row} className="mb-3">
           <Form.Label column sm={2}>
             Email
@@ -108,12 +108,12 @@ const Login = () => {
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button onClick={userLogin}>Login</Button>
+            <Button className="button"   onClick={userLogin}>Login</Button>
           </Col>
         </Form.Group>
-      </Form>
+      
 
-      <Alert variant="success">
+      <Alert variant="success" style={{width:"30%", marginTop:"40px"}}>
       
       <p>
       {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>}
@@ -122,7 +122,7 @@ const Login = () => {
       {isLoggedIn ? <div>welcome</div> : <p>you are not logged In</p>}
       
     </Alert> 
-
+    </Form>
 
 
 
