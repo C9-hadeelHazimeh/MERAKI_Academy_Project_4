@@ -2,11 +2,8 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import "../../src/App.css";
 import { Link, useNavigate } from "react-router-dom";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+import {Button,Col,Row,Alert} from "react-bootstrap";
 import { UserContext } from "../App";
-import Alert from "react-bootstrap/Alert";
 import axios from "axios";
 const Login = () => {
   // UserContext
@@ -116,8 +113,23 @@ const Login = () => {
         </Form.Group>
       </Form>
 
+      <Alert variant="success">
+      
+      <p>
       {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>}
+          </p>
+      <hr />
       {isLoggedIn ? <div>welcome</div> : <p>you are not logged In</p>}
+      
+    </Alert> 
+
+
+
+
+
+
+      {/* {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>} */}
+      {/* {isLoggedIn ? <div>welcome</div> : <p>you are not logged In</p>} */}
     </div>
   );
 };

@@ -1,15 +1,7 @@
 import React, { useContext, useState } from "react";
-import Container from "react-bootstrap/Container";
-import { Nav, Navbar, Row, Col, Card, Carousel } from "react-bootstrap";
-
+import { Container,Nav, Navbar, Row, Col, Card, Carousel } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-
-// import Row from "react-bootstrap/Row";
-// import Col from "react-bootstrap/Col";
-// import Card from "react-bootstrap/Card";
-// import Carousel from "react-bootstrap/Carousel";
 import { UserContext } from "../App";
-//  import ExampleCarouselImage from "../components/Booking"
 
 const Home = () => {
   const { isLoggedIn } = useContext(UserContext);
@@ -35,32 +27,36 @@ const Home = () => {
               alt="Logo"
             />
             <Carousel.Caption>
-              <h3>First slide label</h3>
-              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+              <p className="sliderText">
+                Orientation Result Continuous improvement in our service,
+                quality and technology standards Previous
+              </p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705348357/pexels-andrea-piacquadio-3779696_z6wtx0.jpg" />
             <Carousel.Caption>
-              <h3>Second slide label</h3>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p className="sliderText">
+                Orientation Result Continuous improvement in our service,
+                quality and technology standards Previous
+              </p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705349551/pexels-matthias-zomer-339620_fdfjjy.jpg" />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              <p className="sliderText">
+                OUR VISION To be the world’s preferred healthcare provider by
+                delivering the highest quality and compassionate care.
               </p>
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
             <img src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705350547/pexels-anna-shvets-5069611_jzwlz1.jpg" />
             <Carousel.Caption>
-              <h3>Third slide label</h3>
-              <p>
-                Praesent commodo cursus magna, vel scelerisque nisl consectetur.
+              <p className="sliderText">
+                OUR MISSION We feel Motivated to care for the wellbeing of
+                fellow human being and make them healthy and comfortable.
               </p>
             </Carousel.Caption>
           </Carousel.Item>
@@ -116,20 +112,22 @@ const Home = () => {
                 </Card.Title>
                 <Card.Text className="cardText">
                   Check Out the available consulting data for your checkup .
-                  
-                  Make
-                  appointment 
+                  Make appointment
                 </Card.Text>
               </Card.Body>
+              
             </Card>
+
+      
           </Col>
+          
         </Row>
       </Container>
 
       {/* footer */}
 
       <Container className="my-5">
-        <Row style={{borderBottom:"2px solid"}}>
+        <Row style={{ borderBottom: "2px solid" }}>
           <Col>
             <Card.Body className="media">
               <Card.Title>Services</Card.Title>
@@ -183,7 +181,7 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row style={{marginTop:"30px"}}>
+        <Row style={{ marginTop: "30px" }}>
           <Card.Body>
             <Card.Title></Card.Title>
             <Card.Text className="cardText">

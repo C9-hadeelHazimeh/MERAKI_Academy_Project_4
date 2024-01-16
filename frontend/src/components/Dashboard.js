@@ -1,15 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+import {Container,Nav,Navbar,Card,ListGroup,Button,Modal} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { UserContext } from "../App";
 import axios from "axios";
-import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Button from "react-bootstrap/esm/Button";
-import Modal from 'react-bootstrap/Modal';
-// export const bookingContext = createContext();
 
 const Dashboard = () => {
   const [availableAppointments, setAvailableAppointments] = useState([]);
@@ -74,24 +67,27 @@ const Dashboard = () => {
 
   return (
     <div>
-      Dashboard
-      
-      
-        <Navbar expand="lg" className="bg-body-tertiary">
+        
+             <Navbar expand="lg" className="navBar">
           <Container>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link>
-                  <Link to="/login">Book an appointment</Link>
+              <Nav.Link >
+                  <Link  className="link" to="/dashboard">Dashboard</Link>
                 </Nav.Link>
                 <Nav.Link>
-                  <Link to="/getclinic"> Clinics</Link>
+                  <Link className="link" to="/login">Book an appointment</Link>
+                </Nav.Link>
+                <Nav.Link>
+                  <Link  className="link" to="/getclinic"> Clinics</Link>
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Container>
-        </Navbar>
+        </Navbar> 
+     
+
         {showmodal && (
     <div className="modal show" style={{ display: 'block', position: 'initial' }}>
       <Modal.Dialog>
