@@ -15,12 +15,12 @@ const GetClinic = () => {
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
   const [errormessage, setErrormessage] = useState("");
- const [showReviews,setShowReviews]=useState("")
+  const [showReviews, setShowReviews] = useState("");
   const { token } = useContext(UserContext);
-const  [showAddingReview,setshowAddingReview]=useState("")
-const [review,setReview]=useState("")
-const [clinicId,setclinicId]=useState("")
- const [showmodal,setShowModal]=useState(false)
+  const [showAddingReview, setshowAddingReview] = useState("");
+  const [review, setReview] = useState("");
+  const [clinicId, setclinicId] = useState("");
+  const [showmodal, setShowModal] = useState(false);
   useEffect(() => {
     axios
       .get(`http://localhost:5000/clinics/get`, {
@@ -39,11 +39,11 @@ const [clinicId,setclinicId]=useState("")
   }, []);
 
   const handleAddingReview = (clinicId) => {
-    const newReview={review};
-    console.log("clinicId",clinicId)
-     axios
+    const newReview = { review };
+    console.log("clinicId", clinicId);
+    axios
       .post(
-         `http://localhost:5000/clinics/review/create/${clinicId}`,
+        `http://localhost:5000/clinics/review/create/${clinicId}`,
         newReview,
         {
           headers: {
@@ -52,7 +52,7 @@ const [clinicId,setclinicId]=useState("")
         }
       )
       .then((result) => {
-        console.log("review,",result);
+        console.log("review,", result);
         // setReview(result.data.review)
         setMessageStatus(true);
         setmessage(result.data.message);
@@ -60,131 +60,142 @@ const [clinicId,setclinicId]=useState("")
       .catch((err) => {
         //  setMessageStatus(false);
         console.log(err);
-        setMessageStatus(false)
+        setMessageStatus(false);
         setErrormessage(err.response.data.message);
         // console.log("errormessage",err.response.data.message)
       });
   };
 
-
-
   return (
+    <div className="reviews">
+      <div className="container">
+        {showmodal && (
+          <div
+            className="modal show"
+            style={{ display: "block", position: "initial" }}
+          >
+            <Modal.Dialog>
+              <Modal.Body>
+                {mesageStatus ? <p>{message}</p> : <p>{errormessage}</p>}
+              </Modal.Body>
 
-    
- <div className="reviews">
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => {
+                    setShowModal(false);
+                  }}
+                >
+                  Close
+                </Button>
+              </Modal.Footer>
+            </Modal.Dialog>
+          </div>
+        )}
 
-<div className="container">
-{showmodal && (
-    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
-      <Modal.Dialog>
-        <Modal.Body>
-          {mesageStatus ? <p>{message}</p>:<p>{errormessage}</p>}
-        </Modal.Body>
+        <div></div>
 
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => {setShowModal(false)}}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-    </div>
-  )}
+        {clinics.map((oneClinic) => (
+          //card it self
 
- <div></div>
-
-      {clinics.map((oneClinic) => (
-        //card it self
-        
-        <Row >
-          <Col md={4}>
-            <Card style={{ width: "18rem" }}>
-              <Card.Header>Clinics</Card.Header>
-              <ListGroup variant="flush">
-                <ListGroup.Item>{oneClinic.image}</ListGroup.Item>
-                <ListGroup.Item>
-                  Clinic Name: {oneClinic.clinicName}
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  Doctor Name: {oneClinic.doctor.name}
-                </ListGroup.Item>
-              </ListGroup>
-              <Row>
-                <Col>
-              <Button  className="button-2"  onClick={() =>{setShowReviews(oneClinic._id) }}>
-                Reviews
-              </Button></Col>
-              <Col>  <Button className="button-2"
-            onClick={()=>{setshowAddingReview(oneClinic._id)}}
-            >Add a review</Button></Col>
-            </Row>
-            </Card>
-          </Col>
-          
-          {/*  the reviews card  */}
-          { showReviews===oneClinic._id
-          
-          ? (
+          <Row>
             <Col md={4}>
               <Card style={{ width: "18rem" }}>
-                <Card.Header>Reviews</Card.Header>
+                <Card.Header>Clinics</Card.Header>
                 <ListGroup variant="flush">
-                  {oneClinic.reviews.map((oneReview) => (
-                    <ListGroup.Item>
-                       {oneReview.review}
-                      </ListGroup.Item>
-                   
-                  ))}
-                 
+                  <ListGroup.Item>
+                    {" "}
+                    <img className="clinicImg" src={oneClinic.image} />
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Clinic Name: {oneClinic.clinicName}
+                  </ListGroup.Item>
+                  <ListGroup.Item>
+                    Doctor Name: {oneClinic.doctor.name}
+                  </ListGroup.Item>
                 </ListGroup>
+                <Row>
+                  <Col>
+                    <Button
+                      className="button-2"
+                      onClick={() => {
+                        setShowReviews(oneClinic._id);
+                      }}
+                    >
+                      Reviews
+                    </Button>
+                  </Col>
+                  <Col>
+                    {" "}
+                    <Button
+                      className="button-2"
+                      onClick={() => {
+                        setshowAddingReview(oneClinic._id);
+                      }}
+                    >
+                      Add a review
+                    </Button>
+                  </Col>
+                </Row>
               </Card>
             </Col>
-          ):""
-          
-          }
 
-
-
-
-           
-           {showAddingReview===oneClinic._id? (
-            <>
-           <Form.Group as={Row} className="mb-3">
-           
-           <Col sm={10}>
-             <Form.Control
-               type="text"
-               placeholder=" write your Review..."
-               onChange={(e) => {
-                 setReview(e.target.value);
+            {/*  the reviews card  */}
+            {showReviews === oneClinic._id ? (
+              <Col md={4}>
+                <Card style={{ width: "18rem" }}>
+                  <Card.Header>Reviews</Card.Header>
+                  <ListGroup variant="flush">
+                    {oneClinic.reviews.map((oneReview) => (
+                      <ListGroup.Item>{oneReview.review}</ListGroup.Item>
+                    ))}
+                  </ListGroup>
+                </Card>
+              </Col>
+            ) : (
+              ""
+            )}
+             <div >
+              
+            {showAddingReview === oneClinic._id ? (
+              <>
+                
+                  
+                    <Form.Control
+                    className="addReview"
+                      as="textarea"
+                      rows={4}
+                      placeholder=" write your Review..."
+                      onChange={(e) => {
+                        setReview(e.target.value);
+                      }}
+                   
+                    />
+                    
                  
-               }}
-             />
-           </Col>
-           <Col>
-           <Button className="button"
-           onClick={()=>{
-            
-            handleAddingReview(oneClinic._id)
-           setShowModal(true)
-           }}
-           
-           >Submit</Button>
-           </Col>
-         </Form.Group>
- 
-           
-         </>
+                 <Button
+                      className="button"
+                      style={{marginTop: "1rem"}}
+                      onClick={() => {
+                        handleAddingReview(oneClinic._id);
+                        setShowModal(true);
+                      }}
+                    >
+                      Submit
+                    </Button>
+                  
+                  
+               
+              </>
+            ) : (
+              ""
+            )}
+          </div>
+          </Row>
+        ))}
 
-           ):""}
-          
-          
 
-          
-        </Row>
-      ))}
-      
-    </div>
-      
+      </div>
     </div>
   );
 };

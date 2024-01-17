@@ -18,10 +18,11 @@ const [showmodal,setShowModal]=useState(false);
  const [clinics] = useState(['Derma', 'Dentist', 'general']);
  const {token}=useContext(UserContext);
  const [image, setImage ] = useState("");
-const [ url, setUrl ] = useState("");
+const [url, setUrl] = useState("");
 
   const addDoctor = () => {
-  const newDoctor={image,clinicName:clinics}
+    console.log(url);
+  const newDoctor={image:url,clinicName:clinics}
   
     axios
       .post(`http://localhost:5000/clinics/create`, newDoctor, {
@@ -32,8 +33,7 @@ const [ url, setUrl ] = useState("");
 
       .then((result) => {
         console.log(result);
-      
-        setMessageStatus(true);
+         setMessageStatus(true);
         setmessage(result.data.message);
       })
       .catch((err) => {
@@ -44,18 +44,19 @@ const [ url, setUrl ] = useState("");
   };
 
   const uploadImage = () => {
+    
     const data = new FormData()
     data.append("file", image)
-    data.append("upload_preset", "tutorial")
-    data.append("cloud_name","breellz")
-    fetch("  https://api.cloudinary.com/v1_1/breellz/image/upload",{
-    method:"post",
-    body: data
-    })
-    .then(resp => resp.json())
-    .then(data => {
-      console.log(data)
-    setUrl(data.url)
+    data.append("upload_preset", "nmatt2gf")
+    data.append("cloud_name","dvmoaseij")
+    axios.post("https://api.cloudinary.com/v1_1/dvmoaseij/image/upload",
+   data
+    )
+    // .then(resp => resp.json())
+    .then((data) => {
+
+    console.log(data)
+    setUrl(data.data.url)
     
     })
     .catch(err => console.log(err))
@@ -98,13 +99,21 @@ const [ url, setUrl ] = useState("");
 
 </Form.Select> 
 <div>
-<input type="file" onChange= {(e)=> setImage(e.target.files[0])}></input>
-<button onClick={uploadImage}>Upload</button>
-</div>
-<img src={url}/>
+<input type="file" onChange= {(e)=>{
+  console.log(e.target.files[0]);
+  setImage(e.target.files[0])}}></input>
+<button
+onClick={((e)=>{
+  e.preventDefault()
+  uploadImage()
+console.log("choose");
+})}
+>Choose</button>
+
+<img  className="clinicImg" src={url}/>
 
      
-
+</div>
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
