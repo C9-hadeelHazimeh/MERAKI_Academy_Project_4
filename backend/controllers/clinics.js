@@ -68,7 +68,7 @@ const getAllClinics = (req, res) => {
           doctorInfo: result,
         });
       } else {
-        res.status(200).json({
+        res.status(409).json({
           success: false,
           message: `No doctors added to the clinic yet`,
         });

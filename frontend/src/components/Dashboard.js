@@ -76,9 +76,9 @@ const Dashboard = () => {
               <Nav.Link >
                   <Link  className="link" to="/dashboard">Available appointments</Link>
                 </Nav.Link>
-                <Nav.Link>
+                {/* <Nav.Link>
                   <Link className="link" to="/login">Book an appointment</Link>
-                </Nav.Link>
+                </Nav.Link> */}
                 <Nav.Link>
                   <Link  className="link" to="/getclinic"> Clinics</Link>
                 </Nav.Link>
@@ -119,7 +119,7 @@ const Dashboard = () => {
                 </ListGroup>
 
                 <Button 
-                className="button"
+                className="button-2"
                   variant="primary"
                   onClick={() => {
                     BookAppointemts(availableAppointment._id);

@@ -8,6 +8,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { Container } from "react-bootstrap";
 // import Modal from 'react-bootstrap/Modal';
 const GetClinic = () => {
   const [clinics, setClinics] = useState([]);
@@ -70,7 +71,7 @@ const [clinicId,setclinicId]=useState("")
   return (
 
     
-    <div className="reviews">
+ <div className="reviews">
 
 <div className="container">
 {showmodal && (
@@ -89,8 +90,11 @@ const [clinicId,setclinicId]=useState("")
     </div>
   )}
 
+ <div></div>
 
       {clinics.map((oneClinic) => (
+        //card it self
+        
         <Row >
           <Col md={4}>
             <Card style={{ width: "18rem" }}>
@@ -104,51 +108,19 @@ const [clinicId,setclinicId]=useState("")
                   Doctor Name: {oneClinic.doctor.name}
                 </ListGroup.Item>
               </ListGroup>
-              <Button onClick={() =>{setShowReviews(oneClinic._id) }}>
+              <Row>
+                <Col>
+              <Button  className="button-2"  onClick={() =>{setShowReviews(oneClinic._id) }}>
                 Reviews
-              </Button>
+              </Button></Col>
+              <Col>  <Button className="button-2"
+            onClick={()=>{setshowAddingReview(oneClinic._id)}}
+            >Add a review</Button></Col>
+            </Row>
             </Card>
           </Col>
           
-            <Button 
-            onClick={()=>{setshowAddingReview(oneClinic._id)}}
-            >Add a review</Button> 
-           
-           {showAddingReview===oneClinic._id? (
-            <>
-           <Form.Group as={Row} className="mb-3">
-           <Form.Label column sm={2}>
-             Review
-           </Form.Label>
-           <Col sm={10}>
-             <Form.Control
-               type="text"
-               placeholder="your Review..."
-               onChange={(e) => {
-                 setReview(e.target.value);
-                 // console.log(email);
-               }}
-             />
-           </Col>
-           <Button
-           onClick={()=>{
-            console.log("addReview")
-            // setclinicId()
-            handleAddingReview(oneClinic._id)
-           setShowModal(true)
-           }}
-           
-           >Submit</Button>
-         </Form.Group>
- 
-           
-         </>
-
-           ):""}
-          
-          {/* { oneClinic.reviews.map((review)=>{
-            return review._id
-          })} */}
+          {/*  the reviews card  */}
           { showReviews===oneClinic._id
           
           ? (
@@ -166,7 +138,46 @@ const [clinicId,setclinicId]=useState("")
                 </ListGroup>
               </Card>
             </Col>
-          ):""}
+          ):""
+          
+          }
+
+
+
+
+           
+           {showAddingReview===oneClinic._id? (
+            <>
+           <Form.Group as={Row} className="mb-3">
+           
+           <Col sm={10}>
+             <Form.Control
+               type="text"
+               placeholder=" write your Review..."
+               onChange={(e) => {
+                 setReview(e.target.value);
+                 
+               }}
+             />
+           </Col>
+           <Col>
+           <Button className="button"
+           onClick={()=>{
+            
+            handleAddingReview(oneClinic._id)
+           setShowModal(true)
+           }}
+           
+           >Submit</Button>
+           </Col>
+         </Form.Group>
+ 
+           
+         </>
+
+           ):""}
+          
+          
 
           
         </Row>

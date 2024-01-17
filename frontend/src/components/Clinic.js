@@ -13,10 +13,12 @@ const [message, setmessage] = useState("");
 const [mesageStatus, setMessageStatus] = useState(false);
 const [errormessage, setErrormessage] = useState("");
 const [showmodal,setShowModal]=useState(false);
- const [image,setImage]=useState("");
+ 
  const [clinic,setClinic]=useState(null);
  const [clinics] = useState(['Derma', 'Dentist', 'general']);
  const {token}=useContext(UserContext);
+ const [image, setImage ] = useState("");
+const [ url, setUrl ] = useState("");
 
   const addDoctor = () => {
   const newDoctor={image,clinicName:clinics}
@@ -41,10 +43,25 @@ const [showmodal,setShowModal]=useState(false);
       });
   };
 
-  const handleImageChange = (e) => {
-    console.log(e.target.files[0])
-    setImage(e.target.files[0]);
-  }
+  const uploadImage = () => {
+    const data = new FormData()
+    data.append("file", image)
+    data.append("upload_preset", "tutorial")
+    data.append("cloud_name","breellz")
+    fetch("  https://api.cloudinary.com/v1_1/breellz/image/upload",{
+    method:"post",
+    body: data
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      console.log(data)
+    setUrl(data.url)
+    
+    })
+    .catch(err => console.log(err))
+    }
+
+
 
 
 
@@ -72,20 +89,23 @@ const [showmodal,setShowModal]=useState(false);
      
      <Form.Select value={clinic} onChange={(e) => setClinic(e.target.value)}>
         <option value="">Select Clinic</option>
+        
         {clinics.map((clinicOption, index) => (
           <option key={index} value={clinicOption}>
             {clinicOption}
           </option>
         ))}
-           <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={2}>
-            Image
-          </Form.Label>
-          <Col sm={10}>
-            <Form.Control type="file" onChange={handleImageChange} />
-          </Col>
-        </Form.Group>
-      </Form.Select> 
+
+</Form.Select> 
+<div>
+<input type="file" onChange= {(e)=> setImage(e.target.files[0])}></input>
+<button onClick={uploadImage}>Upload</button>
+</div>
+<img src={url}/>
+
+     
+
+
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
             <Button onClick={addDoctor}
