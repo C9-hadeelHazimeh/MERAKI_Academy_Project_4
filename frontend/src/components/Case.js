@@ -107,7 +107,7 @@ const Case = () => {
     <Row>
       {/* Main Card */}
       <Col md={6}>
-        <Card style={{ width: "18rem" ,margin:"4rem"}}>
+        <Card style={{ width: "18rem" ,margin:"2rem"}}>
           <Card.Header>Booked Appointment </Card.Header>
           <ListGroup variant="flush">
             <ListGroup.Item>{bookAppointment.patient.name}</ListGroup.Item>
@@ -149,7 +149,7 @@ const Case = () => {
         {showPatientHistory === bookAppointment._id && (
           <>
             {patientHistory.map((elem, j) => (
-              <Card  style={{ width: "18rem",margin:"3rem"}}>
+              <Card  style={{ width: "18rem",margin:"2rem"}}>
                 <Card.Header >
 
                   
@@ -175,7 +175,7 @@ const Case = () => {
       {/* Patient Case Card */}
       {patientCase === bookAppointment._id && (
         <Col md={12} className="mt-3">
-          <Card style={{ width: "30rem",margin:"4rem" }}>
+          <Card style={{ width: "30rem",margin:"2rem" }}>
             <Card.Header>Add Patient Case</Card.Header>
             <Card.Body>
               

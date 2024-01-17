@@ -68,7 +68,8 @@ const [url, setUrl] = useState("");
 
 
   return (
-    <div className='container'>
+    <div className='about'>
+    
 {showmodal && (
     <div className="modal show" style={{ display: 'block', position: 'initial' }}>
       <Modal.Dialog>
@@ -84,11 +85,17 @@ const [url, setUrl] = useState("");
       </Modal.Dialog>
     </div>
   )}
-  <Form>
-     
 
-     
-     <Form.Select value={clinic} onChange={(e) => setClinic(e.target.value)}>
+
+
+  <Form className='upload-image'>
+  <div style={{textAlign:"center"}}><h4 style={{margin:"2rem"}}>Add Doctor to a clinic</h4></div>
+
+     <Form.Select 
+     style={{width:"50%"}}
+    
+     value={clinic} onChange={(e) => setClinic(e.target.value)}>
+
         <option value="">Select Clinic</option>
         
         {clinics.map((clinicOption, index) => (
@@ -98,30 +105,36 @@ const [url, setUrl] = useState("");
         ))}
 
 </Form.Select> 
-<div>
-<input type="file" onChange= {(e)=>{
-  console.log(e.target.files[0]);
+<div className='imageUpload'>
+<h4>Upload an image</h4>
+
+<input 
+
+ type="file" onChange= {(e)=>{
+  
   setImage(e.target.files[0])}}></input>
 <button
+className='button'
 onClick={((e)=>{
   e.preventDefault()
   uploadImage()
-console.log("choose");
+
 })}
->Choose</button>
+>upload</button>
 
 <img  className="clinicImg" src={url}/>
 
      
-</div>
+</div >
 
         <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 10, offset: 2 }}>
+          
             <Button onClick={addDoctor}
+            className='button-2'
               
               
               >Add doctor Information</Button>
-          </Col>
+          
         </Form.Group>
       </Form> 
 
