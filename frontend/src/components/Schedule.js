@@ -48,21 +48,21 @@ const newAvailableAppointemt=()=>{
 
 
 return ( 
-<div className='container'>
+<div className="about">
 <Form>
-<Navbar expand="lg" className="bg-body-tertiary">
-      <Container>
+<Navbar expand="lg" className="navBar">
+      
       
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-          <Nav.Link><Link to="/schedule">my Schedule</Link></Nav.Link>
-          <Nav.Link><Link to="/patientCase">Add patient Case</Link></Nav.Link>
-          <Nav.Link><Link to="/clinic">Add to a clinic</Link></Nav.Link>
+          <Nav.Link><Link  className="link" to="/schedule">my Schedule</Link></Nav.Link>
+          <Nav.Link><Link  className="link" to="/patientCase">Add patient Case</Link></Nav.Link>
+          <Nav.Link><Link  className="link" to="/clinic">Add to a clinic</Link></Nav.Link>
            
           </Nav>
         </Navbar.Collapse>
-      </Container>
+      
     </Navbar> 
     </Form>
        
@@ -82,13 +82,16 @@ return (
       </Modal.Dialog>
     </div>
   )}
-  <Form>
+
+
+  <Form style={{margin:"6rem"}}>
         <Form.Group as={Row} className="mb-3">
-          <Form.Label column sm={2}>
-            Date
-          </Form.Label>
+         
           <Col sm={10}>
+          
             <Form.Control
+           
+
               type="date"
               placeholder="The date..."
               onChange={(e) => {
@@ -101,9 +104,10 @@ return (
         </Form.Group>
 
 
-        <Form.Select value={time} onChange={(e) => {setTime(e.target.value)
+        <Form.Select
+        style={{marginBottom:"1rem"}}
+        value={time} onChange={(e) => {setTime(e.target.value)
       
-        console.log(time)
         }}>
         <option value="">Select Hour </option>
         <option value="8-9">8:00 AM - 9:00 AM</option>
@@ -116,7 +120,7 @@ return (
         <option value="03-04">3:00 AM - 4:00 AM</option>
       </Form.Select>
 
-     <Form.Select value={clinic} onChange={(e) => setClinic(e.target.value)}>
+     <Form.Select style={{marginBottom:"1rem"}} value={clinic} onChange={(e) => setClinic(e.target.value)}>
         <option value="">Select Clinic</option>
         {clinics.map((clinicOption, index) => (
           <option key={index} value={clinicOption}>
@@ -125,12 +129,12 @@ return (
         ))}
       </Form.Select> 
         <Form.Group as={Row} className="mb-3">
-          <Col sm={{ span: 10, offset: 2 }}>
-            <Button className='button'  onClick={newAvailableAppointemt}
+          
+            <Button className='button-3' onClick={newAvailableAppointemt}
               
               
               >Add to the sechdule</Button>
-          </Col>
+         
         </Form.Group>
       </Form> 
  

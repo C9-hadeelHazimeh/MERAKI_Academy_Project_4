@@ -66,7 +66,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div>
+    <div className="about">
         
              <Navbar expand="lg" className="navBar">
           

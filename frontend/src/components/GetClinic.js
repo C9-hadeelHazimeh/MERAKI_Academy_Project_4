@@ -7,6 +7,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
+import {CloseButton} from "react-bootstrap"
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
 // import Modal from 'react-bootstrap/Modal';
@@ -68,7 +69,7 @@ const GetClinic = () => {
 
   return (
     <div className="reviews">
-      <div className="container">
+      <div>
         {showmodal && (
           <div
             className="modal show"
@@ -93,13 +94,13 @@ const GetClinic = () => {
           </div>
         )}
 
-        <div></div>
+        <div>
 
         {clinics.map((oneClinic) => (
           //card it self
 
-          <Row>
-            <Col md={4}>
+          <Row style={{marginBottom:"2rem"}}>
+            <div className="cardAndReview">
               <Card style={{ width: "18rem" }}>
                 <Card.Header>Clinics</Card.Header>
                 <ListGroup variant="flush">
@@ -138,24 +139,27 @@ const GetClinic = () => {
                   </Col>
                 </Row>
               </Card>
-            </Col>
+              
 
             {/*  the reviews card  */}
             {showReviews === oneClinic._id ? (
-              <Col md={4}>
+             
                 <Card style={{ width: "18rem" }}>
-                  <Card.Header>Reviews</Card.Header>
+                  <Card.Header>Reviews <CloseButton 
+                   style={{ float: "right" }}
+                  onClick={()=>{setShowReviews(null)}}/></Card.Header>
                   <ListGroup variant="flush">
                     {oneClinic.reviews.map((oneReview) => (
                       <ListGroup.Item>{oneReview.review}</ListGroup.Item>
                     ))}
                   </ListGroup>
                 </Card>
-              </Col>
+                
             ) : (
               ""
             )}
-             <div >
+            </div>
+             <div>
               
             {showAddingReview === oneClinic._id ? (
               <>
@@ -169,22 +173,33 @@ const GetClinic = () => {
                       onChange={(e) => {
                         setReview(e.target.value);
                       }}
+                
                    
                     />
                     
                  
                  <Button
                       className="button"
-                      style={{marginTop: "1rem"}}
+                      style={{float:"left"}}
                       onClick={() => {
                         handleAddingReview(oneClinic._id);
                         setShowModal(true);
+                       setshowAddingReview(false)
                       }}
                     >
                       Submit
                     </Button>
                   
-                  
+                  <Button
+                  className="button"
+                   onClick={() => {
+                                           
+                    setshowAddingReview(false)
+                   }}>Close 
+                 
+
+
+                  </Button>
                
               </>
             ) : (
@@ -194,7 +209,7 @@ const GetClinic = () => {
           </Row>
         ))}
 
-
+</div>
       </div>
     </div>
   );
