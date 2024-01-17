@@ -11,13 +11,13 @@ const Home = () => {
     if (isLoggedIn === null) {
       navigate("/register");
     } else {
-      console.log("login");
+      navigate("/getClinic");
     }
   };
 
   return (
     //header
-    <div>
+    <div className="about"> 
       {/* slider */}
       <div className="slider">
         <Carousel>
@@ -64,10 +64,10 @@ const Home = () => {
       </div>
       {/* cards */}
 
-      <Container className="my-4">
-        <Row>
-          <Col md={6} className="custom-col">
-            <Card onClick={handleCardClick}>
+      <div className="cardContainerHome">
+        
+          
+            <Card className="card" onClick={handleCardClick}>
               {/* Card 1 content */}
               <Card.Body className="my-4">
                 <Card.Title>
@@ -90,9 +90,9 @@ const Home = () => {
                 </Card.Text>
               </Card.Body>
             </Card>
-          </Col>
+          
 
-          <Col md={6} className="custom-col">
+         
             <Card>
               {/* Card 2 content */}
               <Card.Body className="my-4">
@@ -118,11 +118,36 @@ const Home = () => {
               
             </Card>
 
-      
-          </Col>
+            
+
+            
+            <Card onClick={handleCardClick}>
+              {/* Card 1 content */}
+              <Card.Body className="my-4">
+                <Card.Title>
+                  <div className="icons">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="30"
+                      fill="currentColor"
+                      class="bi bi-person-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                    </svg>
+                  </div>
+                </Card.Title>
+                <Card.Text className="cardText">
+                  Meet our highly qualified and experienced multilinguistic
+                  medical professional.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           
-        </Row>
-      </Container>
+  
+        
+      </div>
 
       {/* footer */}
 
@@ -130,7 +155,7 @@ const Home = () => {
         <Row style={{ borderBottom: "2px solid" }}>
           <Col>
             <Card.Body className="media">
-              <Card.Title>Services</Card.Title>
+              <Card.Title>Home</Card.Title>
               <Card.Text className="cardText"></Card.Text>
               <hr />
             </Card.Body>
@@ -142,6 +167,17 @@ const Home = () => {
               <hr />
             </Card.Body>
           </Col>
+          <Col>
+            <Card.Body className="media">
+              <Card.Title>Services</Card.Title>
+              <Card.Text className="cardText"></Card.Text>
+              <hr />
+            </Card.Body>
+          </Col>
+
+
+
+
 
           <Col>
             <Card.Body className="media">

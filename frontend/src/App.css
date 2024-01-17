@@ -4,7 +4,7 @@
 .about {
   background-color: rgb(248, 231, 210);
   min-height: 100vh;
-  /* margin-bottom: 20px; */
+  
 }
 
 .homeHeader {
@@ -13,6 +13,13 @@
   column-gap: 10%;
   padding-left: 20px;
   background-color: rgb(13, 111, 111);
+}
+
+.cardContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+
 }
 
 .homeHeader img {
@@ -62,7 +69,7 @@
 }
 
 .container {
-  padding: 1rem;
+  padding: 2rem;
   height: 70%;
   width: 70%;
 }
@@ -74,6 +81,7 @@
 .slider {
   padding: 2rem;
   width: 100%;
+  
 }
 .sliderText {
   color: black;
@@ -96,6 +104,11 @@
 .icons :on-hover {
   color: brown;
 }
+.card{
+  width: 100%;
+  height: 100%;
+  
+}
 
 .cardText {
   font-size: large;
@@ -104,7 +117,6 @@
   font-weight: bold;
 }
 .my-5 {
-  height: 100%;
   width: 100%;
   padding: 2rem;
   background-color: rgb(13, 111, 111);
@@ -113,24 +125,23 @@
 
 .media {
   margin-left: 20%;
-
   display: flex;
   gap: 20px;
 }
 
-.custom-col {
-  display: flex;
-  flex-direction: column;
-}
 
-.custom-col .card {
-  flex: 1;
-}
-.cardContainer {
+.cardContainerHome {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 10px;
+  width: 100%;
+  padding: 2rem;
 }
+
+
+
+
+
 .button {
   background-color: rgb(13, 111, 111);
   font-size: large;
@@ -192,4 +203,10 @@ box-shadow: 10px 0px 10px 10px rgb(13, 111, 111);
 }
 .imageUpload button{
   width: 70%;
+}
+.addReview-{
+
+  border: 2px solid rgb(13, 111, 111);
+  width: 50%;
+  margin-left: 2rem;
 }

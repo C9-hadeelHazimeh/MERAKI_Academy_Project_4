@@ -1,13 +1,10 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import { Container } from "react-bootstrap";
-import Row from "react-bootstrap/Row";
+import { Alert, Form, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-// export const RoleContext = createContext();
+
 const Register = () => {
   const navigate = useNavigate();
   const [name, settName] = useState("");
@@ -15,11 +12,10 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(0);
   const [phoneNumber, setphoneNumber] = useState(0);
-  
+
   const [role, setRole] = useState(null);
 
-  //const patienrole
-  //const doctorrole
+ 
 
   //   const [isPatient,setisPaitent]=useState(false);
 
@@ -40,17 +36,16 @@ const Register = () => {
   //if he is patient show the date that related to the patient => else show the date of doctor
   const handleRadioChoice = (e) => {
     setRole(e.target.value);
-    console.log(role,e.target.value);
+    console.log(role, e.target.value);
   };
 
   const createNewUser = (e) => {
     e.preventDefault();
-    const newUser = { name, age, email, password, phoneNumber,role };
+    const newUser = { name, age, email, password, phoneNumber, role };
     console.log(newUser);
     axios
       .post("http://localhost:5000/users/register", newUser)
       .then((res) => {
-        
         //set massage that comes from Backend
         setMessageStatus(true);
         setmessage(res.data.message);
@@ -65,9 +60,8 @@ const Register = () => {
   };
 
   return (
-    <div className="container">
-    
-      <Form>
+    <div className="about">
+      <Form className="container">
         <Form.Group
           as={Row}
           className="mb-3"
@@ -212,42 +206,49 @@ const Register = () => {
 
         <Form.Group as={Row} className="mb-3">
           <Col sm={{ span: 10, offset: 2 }}>
-            <Button  className="button" type="submit" onClick={createNewUser}>
+            <Button className="button" type="submit" onClick={createNewUser}>
               Register
             </Button>
           </Col>
         </Form.Group>
+        <Alert variant="success" style={{ width: "30%", marginTop: "40px" }}>
+        <p>{messageStatus ? <p> {message}</p> : <p>{errormessage}</p>}</p>
+        <hr />
+      </Alert>
+
+
+      <hr />
+
+<p>Already have an account?</p>
+
+<Button
+  className="button"
+  type="submit"
+  onClick={() => {
+    navigate("/login");
+  }}
+>
+  Login
+</Button>
       </Form>
-      {messageStatus ? (
+
+      
+      {/* { messageStatus? (
         <>
           <h5>{message}</h5>
       
        
 
-          <hr />
-          
-            
-          <p>Already have an account?</p>
-          
-            
-             
-              <Button
-              className="button"
-                type="submit"
-                onClick={() => {
-                  navigate("/login");
-                }}
-              >
-                Login
-              </Button>
+         
            
            
          
         </>
       ) : (
         <div>{errormessage}</div>
-      )}
-      {/* </RoleContext.Provider> */}
+      )} */}
+
+     
     </div>
   );
 };

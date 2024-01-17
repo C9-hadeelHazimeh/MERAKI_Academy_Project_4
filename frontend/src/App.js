@@ -83,25 +83,31 @@ function App() {
                   </NavDropdown>
 
                   <Nav.Link>
-                    <Link to="/login" className="link">
-                      Login
-                    </Link>
-                  </Nav.Link>
-                  <Nav.Link>
                     <Link to="/register" className="link">
                       Register
                     </Link>
                   </Nav.Link>
+
                   <Nav.Link>
-                    <Link to="/logout" className="link">
-                      Logout
+                    <Link to="/login" className="link">
+                      Login
                     </Link>
                   </Nav.Link>
+
+
                   <Nav.Link>
                     <Link to="/contact" className="link">
                       Contact us
                     </Link>
                   </Nav.Link>
+
+
+                  <Nav.Link>
+                    <Link to="/logout" className="link">
+                      Logout
+                    </Link>
+                  </Nav.Link>
+                  
                 </Nav>
               </Navbar.Collapse>
             </Container>

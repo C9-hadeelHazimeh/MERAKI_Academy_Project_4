@@ -7,7 +7,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/esm/Button";
 import Modal from "react-bootstrap/Modal";
-import {CloseButton} from "react-bootstrap"
+import { CloseButton } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import { Container } from "react-bootstrap";
 // import Modal from 'react-bootstrap/Modal';
@@ -68,7 +68,7 @@ const GetClinic = () => {
   };
 
   return (
-    <div className="reviews">
+    <div className="about">
       <div>
         {showmodal && (
           <div
@@ -95,121 +95,123 @@ const GetClinic = () => {
         )}
 
         <div>
+          {clinics.map((oneClinic) => (
+            //card it self
 
-        {clinics.map((oneClinic) => (
-          //card it self
-
-          <Row style={{marginBottom:"2rem"}}>
-            <div className="cardAndReview">
-              <Card style={{ width: "18rem" }}>
-                <Card.Header>Clinics</Card.Header>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>
-                    {" "}
-                    <img className="clinicImg" src={oneClinic.image} />
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    Clinic Name: {oneClinic.clinicName}
-                  </ListGroup.Item>
-                  <ListGroup.Item>
-                    Doctor Name: {oneClinic.doctor.name}
-                  </ListGroup.Item>
-                </ListGroup>
-                <Row>
-                  <Col>
-                    <Button
-                      className="button-2"
-                      onClick={() => {
-                        setShowReviews(oneClinic._id);
-                      }}
-                    >
-                      Reviews
-                    </Button>
-                  </Col>
-                  <Col>
-                    {" "}
-                    <Button
-                      className="button-2"
-                      onClick={() => {
-                        setshowAddingReview(oneClinic._id);
-                      }}
-                    >
-                      Add a review
-                    </Button>
-                  </Col>
-                </Row>
-              </Card>
-              
-
-            {/*  the reviews card  */}
-            {showReviews === oneClinic._id ? (
-             
-                <Card style={{ width: "18rem" }}>
-                  <Card.Header>Reviews <CloseButton 
-                   style={{ float: "right" }}
-                  onClick={()=>{setShowReviews(null)}}/></Card.Header>
+            <Row style={{ marginBottom: "2rem" }}>
+              <div className="cardAndReview">
+                <Card
+                  style={{ width: "18rem", margin: "2rem", marginLeft: "6rem" }}
+                >
+                  <Card.Header>Clinics</Card.Header>
                   <ListGroup variant="flush">
-                    {oneClinic.reviews.map((oneReview) => (
-                      <ListGroup.Item>{oneReview.review}</ListGroup.Item>
-                    ))}
+                    <ListGroup.Item>
+                      {" "}
+                      <img className="clinicImg" src={oneClinic.image} />
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      Clinic Name: {oneClinic.clinicName}
+                    </ListGroup.Item>
+                    <ListGroup.Item>
+                      Doctor Name: {oneClinic.doctor.name}
+                    </ListGroup.Item>
                   </ListGroup>
+                  <Row>
+                    <Col>
+                      <Button
+                        className="button-2"
+                        style={{height:"100%"}}
+                        onClick={() => {
+                          setShowReviews(oneClinic._id);
+                        }}
+                      >
+                        Reviews
+                      </Button>
+                    </Col>
+                    <Col>
+                      {" "}
+                      <Button
+                        className="button-2"
+                        onClick={() => {
+                          setshowAddingReview(oneClinic._id);
+                        }}
+                      >
+                        Add a review
+                      </Button>
+                    </Col>
+                  </Row>
                 </Card>
-                
-            ) : (
-              ""
-            )}
-            </div>
-             <div>
-              
-            {showAddingReview === oneClinic._id ? (
-              <>
-                
-                  
-                    <Form.Control
-                    className="addReview"
-                      as="textarea"
-                      rows={4}
-                      placeholder=" write your Review..."
-                      onChange={(e) => {
-                        setReview(e.target.value);
-                      }}
-                
-                   
-                    />
+
+                {/*  the reviews card  */}
+                {showReviews === oneClinic._id ? (
+                  <Card style={{ width: "18rem", margin: "2rem" }}>
+                    <Card.Header>
+                      Reviews{" "}
+                      <CloseButton
+                        style={{ float: "right" }}
+                        onClick={() => {
+                          setShowReviews(null);
+                        }}
+                      />
+                    </Card.Header>
+                    <ListGroup variant="flush">
+                      {oneClinic.reviews.map((oneReview) => (
+                        <ListGroup.Item>{oneReview.review}</ListGroup.Item>
+                      ))}
+                    </ListGroup>
+                  </Card>
+                ) : (
+                  ""
+                )}
+                 </div>
+
+                {showAddingReview === oneClinic._id ? (
+                <div>
+                  <Row>
+                  <Form.Control
+                  className="addReview-"
+                    as="textarea"
+                    rows={4}
+                    placeholder=" write your Review..."
+                    onChange={(e) => {
+                      setReview(e.target.value);
+                    }}
+                  />
+
+</Row>
+<Row style={{marginLeft:"1rem"}}>
                     
-                 
-                 <Button
-                      className="button"
-                      style={{float:"left"}}
-                      onClick={() => {
-                        handleAddingReview(oneClinic._id);
-                        setShowModal(true);
-                       setshowAddingReview(false)
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  
-                  <Button
-                  className="button"
-                   onClick={() => {
-                                           
-                    setshowAddingReview(false)
-                   }}>Close 
-                 
+                      <Button
+                        className="button"
+                      
+                        onClick={() => {
+                          handleAddingReview(oneClinic._id);
+                          setShowModal(true);
+                          setshowAddingReview(false);
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    
 
-
-                  </Button>
-               
-              </>
-            ) : (
-              ""
-            )}
-          </div>
-          </Row>
-        ))}
-
-</div>
+                    
+                      <Button
+                        className="button"
+                        onClick={() => {
+                          setshowAddingReview(false);
+                        }}
+                      >
+                        Close
+                      </Button>
+                    
+                    </Row>
+                </div>
+              ) : (
+                ""
+              )}
+            </Row>
+          ))}
+        </div>
       </div>
     </div>
   );
