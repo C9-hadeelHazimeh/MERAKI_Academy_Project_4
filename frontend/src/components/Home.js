@@ -1,5 +1,13 @@
 import React, { useContext, useState } from "react";
-import { Container,Nav, Navbar, Row, Col, Card, Carousel } from "react-bootstrap";
+import {
+  Container,
+  Nav,
+  Navbar,
+  Row,
+  Col,
+  Card,
+  Carousel,
+} from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 
@@ -17,7 +25,7 @@ const Home = () => {
 
   return (
     //header
-    <div className="about"> 
+    <div className="about">
       {/* slider */}
       <div className="slider">
         <Carousel>
@@ -65,119 +73,113 @@ const Home = () => {
       {/* cards */}
 
       <div className="cardContainerHome">
-        
-          
-            <Card className="card" onClick={handleCardClick}>
-              {/* Card 1 content */}
-              <Card.Body className="my-4">
-                <Card.Title>
-                  <div className="icons">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="30"
-                      fill="currentColor"
-                      class="bi bi-person-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                    </svg>
-                  </div>
-                </Card.Title>
-                <Card.Text className="cardText">
-                  Meet our highly qualified and experienced multilinguistic
-                  medical professional.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          
+        <Card className="card" onClick={handleCardClick}>
+          {/* Card 1 content */}
+          <Card.Body className="my-4">
+            <Card.Title>
+              <div className="icons">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="30"
+                  fill="currentColor"
+                  class="bi bi-person-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+                </svg>
+              </div>
+            </Card.Title>
+            <Card.Text className="cardText">
+              Meet our highly qualified and experienced team. our team are dedicated and experienced doctors,
+              committed to providing personalized and expert care. Discover the
+              expertise and compassion that defines our healthcare
+              professionals.
+            </Card.Text>
+          </Card.Body>
+        </Card>
 
-         
-            <Card>
-              {/* Card 2 content */}
-              <Card.Body className="my-4">
-                <Card.Title>
-                  <div className="icons">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      class="bi bi-table"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
-                    </svg>
-                  </div>
-                </Card.Title>
-                <Card.Text className="cardText">
-                  Check Out the available consulting data for your checkup .
-                  Make appointment
-                </Card.Text>
-              </Card.Body>
-              
-            </Card>
+        <Card>
+          {/* Card 2 content */}
+          <Card.Body className="my-4">
+            <Card.Title>
+              <div className="icons">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="30"
+                  fill="currentColor"
+                  class="bi bi-table"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
+                </svg>
+              </div>
+            </Card.Title>
+            <Card.Text className="cardText">
+              Check Out the available consulting data for your checkup . You can
+              effortlessly schedule appointments and check in with ease,
+              experiencing minimal wait times. Our streamlined process ensures a
+              convenient and efficient experience for all
+            </Card.Text>
+          </Card.Body>
+        </Card>
 
-            
-
-            
-            <Card onClick={handleCardClick}>
-              {/* Card 1 content */}
-              <Card.Body className="my-4">
-                <Card.Title>
-                  <div className="icons">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="30"
-                      fill="currentColor"
-                      class="bi bi-person-fill"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
-                    </svg>
-                  </div>
-                </Card.Title>
-                <Card.Text className="cardText">
-                  Meet our highly qualified and experienced multilinguistic
-                  medical professional.
-                </Card.Text>
-              </Card.Body>
-            </Card>
-          
-  
-        
+        <Card onClick={handleCardClick}>
+          {/* Card 3 content */}
+          <Card.Body className="my-4">
+            <Card.Title>
+              <div className="icons">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="30"
+                  fill="currentColor"
+                  class="bi bi-clipboard-pulse"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M10 1.5a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5zm-5 0A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5v1A1.5 1.5 0 0 1 9.5 4h-3A1.5 1.5 0 0 1 5 2.5zm-2 0h1v1H3a1 1 0 0 0-1 1V14a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V3.5a1 1 0 0 0-1-1h-1v-1h1a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V3.5a2 2 0 0 1 2-2m6.979 3.856a.5.5 0 0 0-.968.04L7.92 10.49l-.94-3.135a.5.5 0 0 0-.895-.133L4.232 10H3.5a.5.5 0 0 0 0 1h1a.5.5 0 0 0 .416-.223l1.41-2.115 1.195 3.982a.5.5 0 0 0 .968-.04L9.58 7.51l.94 3.135A.5.5 0 0 0 11 11h1.5a.5.5 0 0 0 0-1h-1.128z"
+                  />
+                </svg>
+              </div>
+            </Card.Title>
+            <Card.Text className="cardText">
+              you can securely save and store patient cases under treatment, and
+              easily retrieve and review the patient's complete history whenever
+              necessary, ensuring comprehensive and accessible healthcare
+              records
+            </Card.Text>
+          </Card.Body>
+        </Card>
       </div>
 
       {/* footer */}
 
       <Container className="my-5">
-        <Row style={{ borderBottom: "2px solid" }}>
+        <Row style={{  marginTop:"2rem",borderBottom: "2px solid" }}>
           <Col>
             <Card.Body className="media">
-              <Card.Title>Home</Card.Title>
+              <Card.Title style={{cursor:"pointer"}} onClick={()=>{navigate("/home")}}>Guides</Card.Title>
               <Card.Text className="cardText"></Card.Text>
               <hr />
             </Card.Body>
           </Col>
           <Col>
             <Card.Body className="media">
-              <Card.Title>Contact Us</Card.Title>
+              <Card.Title   style={{cursor:"pointer"}} onClick={()=>{navigate("/contact")}}>Contact Us</Card.Title>
               <Card.Text className="cardText"></Card.Text>
               <hr />
             </Card.Body>
           </Col>
           <Col>
             <Card.Body className="media">
-              <Card.Title>Services</Card.Title>
+              <Card.Title  style={{cursor:"pointer"}} onClick={()=>{navigate("/schedule")}}>Services</Card.Title>
               <Card.Text className="cardText"></Card.Text>
               <hr />
             </Card.Body>
           </Col>
-
-
-
-
 
           <Col>
             <Card.Body className="media">
@@ -217,10 +219,10 @@ const Home = () => {
           </Col>
         </Row>
 
-        <Row style={{ marginTop: "30px" }}>
+        <Row>
           <Card.Body>
             <Card.Title></Card.Title>
-            <Card.Text className="cardText">
+            <Card.Text className="cardText" style={{marginLeft:"35%",marginTop:"2rem"}}>
               <p>&copy; 2024 Care App. All rights reserved.</p>
             </Card.Text>
           </Card.Body>

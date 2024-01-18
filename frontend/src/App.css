@@ -1,4 +1,6 @@
 .App {
+  background-color: rgb(248, 231, 210);
+  min-height: 100vh;
 }
 
 .about {
@@ -23,8 +25,7 @@
 }
 
 .homeHeader img {
-  width: 150px;
-  height: auto;
+  width: 120px;
   border-radius: 40%;
   padding-left: 10px;
 }
@@ -100,33 +101,38 @@
   justify-content: center;
   align-items: center;
   color: rgb(13, 111, 111);
+  cursor: pointer;
+  
 }
-.icons :on-hover {
-  color: brown;
-}
+
 .card{
   width: 100%;
   height: 100%;
-  
+
 }
 
 .cardText {
   font-size: large;
   text-align: justify;
-  text-align: center;
+  cursor: pointer;
+  
   font-weight: bold;
+  height: fit-content
 }
 .my-5 {
   width: 100%;
-  padding: 2rem;
+  /* padding-bottom: 2rem;
+  padding-top: 2rem; */
   background-color: rgb(13, 111, 111);
   color: whitesmoke;
 }
+
 
 .media {
   margin-left: 20%;
   display: flex;
   gap: 20px;
+  
 }
 
 
@@ -135,7 +141,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   width: 100%;
-  padding: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+ 
 }
 
 
@@ -182,6 +190,22 @@
   color: whitesmoke;
   margin-left: 10px;
 }
+ 
+.button-4{
+  background-color: whitesmoke;
+  }
+  .link-2 {
+    margin-right: 15px;
+    font-size: large;
+    font-weight: bold;
+    color: rgb(13, 111, 111);
+    text-decoration: none;
+    text-align: center;
+  }
+
+
+
+
 .upload-image{
 
   display: flex;

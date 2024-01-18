@@ -8,16 +8,7 @@ import Dashboard from "./components/Dashboard";
 import Schedule from "./components/Schedule";
 import Case from "./components/Case";
 import Clinic from "./components/Clinic";
-import {
-  Row,
-  Col,
-  Card,
-  Carousel,
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-} from "react-bootstrap";
+import {Container,  Navbar,  Nav,  Button,ButtonGroup,  NavDropdown} from "react-bootstrap";
 import LogOut from "./components/LogOut";
 import GetClinic from "./components/GetClinic";
 import Booking from "./components/Booking";
@@ -48,12 +39,12 @@ function App() {
         <div className="homeHeader">
           <Link to="/home">
             <img
-              src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"
+              src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705586077/Capture_aljnz6.jpg"
               alt="Logo"
             />
           </Link>
           <Navbar className="bg-body-tertiary">
-            <Container>
+            <Container style={{marginLeft:"2rem"}}>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -88,25 +79,27 @@ function App() {
                     </Link>
                   </Nav.Link>
 
-                  <Nav.Link>
-                    <Link to="/login" className="link">
-                      Login
-                    </Link>
-                  </Nav.Link>
-
+                  
 
                   <Nav.Link>
                     <Link to="/contact" className="link">
                       Contact us
                     </Link>
                   </Nav.Link>
-
-
-                  <Nav.Link>
-                    <Link to="/logout" className="link">
+                  <ButtonGroup style={{backgroundColor:"white"}} aria-label="Basic example">
+      <Button variant="secondary" className="button-4"><Link className="link-2" to="/login">
+                      Login
+                    </Link></Button>
+          <Button className="button-4"   variant="secondary">
+                    <Link className="link-2" to="/logout" >
                       Logout
-                    </Link>
-                  </Nav.Link>
+                    </Link></Button>
+    </ButtonGroup>
+                  
+                    
+                 
+
+                  
                   
                 </Nav>
               </Navbar.Collapse>
