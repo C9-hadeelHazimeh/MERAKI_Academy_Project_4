@@ -1,8 +1,8 @@
 const clinicModel = require("../models/clinic");
-
+const clinicNames = ["Derma", "Dental", "General"];
 //this function is to render the clinic names
 const getClinicNames = (req, res) => {
-  const clinicNames = ["Derma", "Dental", "General"];
+ 
   return res.status(200).json({
     success: true,
     clinics: clinicNames,
@@ -31,8 +31,7 @@ const addnewDoctor = async (req, res) => {
       message: "the doctor is already registered at this clinic ",
     });
    }
-  // const DoctorName=clinicModel.findById({_id:doctor})
-  //  console.log(DoctorName);
+  
   
   newDoctor
     .save()

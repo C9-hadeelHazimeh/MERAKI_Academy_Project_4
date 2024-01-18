@@ -11,6 +11,7 @@ const Login = () => {
   const [password, setPassword] = useState(0);
   const [message, setmessage] = useState("");
   const [mesageStatus, setMessageStatus] = useState(false);
+  const [alert, setAlert] = useState(false);
   const [errormessage, setErrormessage] = useState("");
   const [Role, setRole] = useState("");
   const { token, isLoggedIn, setIsLoggedIn, setToken } =
@@ -31,17 +32,18 @@ const Login = () => {
       .then((result) => {
         setMessageStatus(true);
         setmessage(result.data.message); //I have to remove this and make the messages as alerts
+        setAlert(true);
         //store the token in local storage
         localStorage.setItem("token", result.data.token);
         localStorage.setItem("isLoggedIn", true);
         setToken(result.data.token);
         setIsLoggedIn(true);
-        // console.log(token);
-        userRole();
+         userRole();
       })
       .catch((err) => {
         setMessageStatus(false);
         setErrormessage(err.response.data.message);
+        setAlert(true);
       });
   };
 
@@ -112,8 +114,10 @@ const Login = () => {
           </Col>
         </Form.Group>
       
-
-      <Alert variant="success" style={{width:"30%", marginTop:"40px"}}>
+        
+     {alert&&
+     <>
+     <Alert variant="success" style={{width:"30%", marginTop:"40px"}}>
       
       <p>
       {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>}
@@ -121,15 +125,9 @@ const Login = () => {
       <hr />
       {isLoggedIn ? <div>welcome</div> : <p>you are not logged In</p>}
       
-    </Alert> 
+    </Alert></> } 
     </Form>
 
-
-
-
-
-      {/* {mesageStatus ? <p> {message}</p> : <p>{errormessage}</p>} */}
-      {/* {isLoggedIn ? <div>welcome</div> : <p>you are not logged In</p>} */}
     </div>
   );
 };

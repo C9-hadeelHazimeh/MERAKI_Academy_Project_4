@@ -101,7 +101,7 @@ const GetClinic = () => {
             <Row style={{ marginBottom: "2rem" }}>
               <div className="cardAndReview">
                 <Card
-                  style={{ width: "18rem", margin: "2rem", marginLeft: "6rem" }}
+                  style={{ width: "18rem", marginLeft:"6rem" }}
                 >
                   <Card.Header>Clinics</Card.Header>
                   <ListGroup variant="flush">
@@ -144,7 +144,7 @@ const GetClinic = () => {
 
                 {/*  the reviews card  */}
                 {showReviews === oneClinic._id ? (
-                  <Card style={{ width: "18rem", margin: "2rem" }}>
+                  <Card style={{ width: "18rem"}}>
                     <Card.Header>
                       Reviews{" "}
                       <CloseButton
@@ -166,7 +166,7 @@ const GetClinic = () => {
                  </div>
 
                 {showAddingReview === oneClinic._id ? (
-                <div>
+                <div style={{margin:"2rem"}}>
                   <Row>
                   <Form.Control
                   className="addReview-"
@@ -179,11 +179,11 @@ const GetClinic = () => {
                   />
 
 </Row>
-<Row style={{marginLeft:"1rem"}}>
+<Row style={{marginLeft:"2rem"}}>
                     
                       <Button
                         className="button"
-                      
+                      style={{width:"10%", margin:"1rem"}}
                         onClick={() => {
                           handleAddingReview(oneClinic._id);
                           setShowModal(true);
@@ -197,6 +197,7 @@ const GetClinic = () => {
                     
                       <Button
                         className="button"
+                        style={{width:"10%", margin:"1rem"}}
                         onClick={() => {
                           setshowAddingReview(false);
                         }}

@@ -4,7 +4,6 @@ import { Alert, Form, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 const Register = () => {
   const navigate = useNavigate();
   const [name, settName] = useState("");
@@ -12,24 +11,13 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(0);
   const [phoneNumber, setphoneNumber] = useState(0);
-
+  const [alert, setAlert] = useState(false);
   const [role, setRole] = useState(null);
-
- 
-
-  //   const [isPatient,setisPaitent]=useState(false);
-
   const [specialist, setSpecialist] = useState("");
   //if ispatient===true=>show appointments,patientHistory else show specialist
   const [appointments, setAppointments] = useState(null);
   const [patientHistory, setPatientHistory] = useState(null);
-  // const handleisPatient=()=>{
-  //     role==="objectId"&&setisPaitent(true)
-  //     return true
-
-  // }
-
-  const [message, setmessage] = useState("");
+   const [message, setmessage] = useState("");
   const [messageStatus, setMessageStatus] = useState(true);
   const [errormessage, setErrormessage] = useState("");
 
@@ -48,12 +36,14 @@ const Register = () => {
       .then((res) => {
         //set massage that comes from Backend
         setMessageStatus(true);
+        setAlert(true);
         setmessage(res.data.message);
 
         // navigate("/login");
       })
       .catch((err) => {
         console.log("err>>:", err.response.data.message);
+        setAlert(true);
         setMessageStatus(false);
         setErrormessage(err.response.data.message);
       });
@@ -211,44 +201,34 @@ const Register = () => {
             </Button>
           </Col>
         </Form.Group>
-        <Alert variant="success" style={{ width: "30%", marginTop: "40px" }}>
-        <p>{messageStatus ? <p> {message}</p> : <p>{errormessage}</p>}</p>
+        {alert ? (
+          <>
+            <Alert
+              variant="success"
+              style={{ width: "30%", marginTop: "40px" }}
+            >
+              <p>{messageStatus ? <p> {message}</p> : <p>{errormessage}</p>}</p>
+              <hr />
+            </Alert>
+          </>
+        ) : (
+          ""
+        )}
+
         <hr />
-      </Alert>
 
+        <p>Already have an account?</p>
 
-      <hr />
-
-<p>Already have an account?</p>
-
-<Button
-  className="button"
-  type="submit"
-  onClick={() => {
-    navigate("/login");
-  }}
->
-  Login
-</Button>
+        <Button
+          className="button"
+          type="submit"
+          onClick={() => {
+            navigate("/login");
+          }}
+        >
+          Login
+        </Button>
       </Form>
-
-      
-      {/* { messageStatus? (
-        <>
-          <h5>{message}</h5>
-      
-       
-
-         
-           
-           
-         
-        </>
-      ) : (
-        <div>{errormessage}</div>
-      )} */}
-
-     
     </div>
   );
 };

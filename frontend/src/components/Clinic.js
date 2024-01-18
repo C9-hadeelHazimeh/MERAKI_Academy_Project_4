@@ -3,7 +3,6 @@ import { UserContext } from "../App";
 import axios from 'axios';
 import Form from 'react-bootstrap/Form';
 import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Modal from 'react-bootstrap/Modal';
 
@@ -21,8 +20,9 @@ const [showmodal,setShowModal]=useState(false);
 const [url, setUrl] = useState("");
 
   const addDoctor = () => {
+    const selectedClinic = clinic || clinics[0];
     console.log(url);
-  const newDoctor={image:url,clinicName:clinics}
+  const newDoctor={image:url,clinicName:selectedClinic}
   
     axios
       .post(`http://localhost:5000/clinics/create`, newDoctor, {
@@ -35,11 +35,13 @@ const [url, setUrl] = useState("");
         console.log(result);
          setMessageStatus(true);
         setmessage(result.data.message);
+        setShowModal(true)
       })
       .catch((err) => {
         console.log(err);
         setMessageStatus(false);
         setErrormessage(err.response.data.message);
+        setShowModal(true)
       });
   };
 
@@ -91,7 +93,20 @@ const [url, setUrl] = useState("");
   <Form className='upload-image'>
   <div style={{textAlign:"center"}}><h4 style={{margin:"2rem"}}>Add Doctor to a clinic</h4></div>
 
-     <Form.Select 
+  <Form.Select
+          style={{ width: "50%" }}
+          value={clinic || ""}
+          onChange={(e) => setClinic(e.target.value)}
+        >
+          <option value="">Select Clinic</option>
+          {clinics.map((clinicOption, index) => (
+            <option key={index} value={clinicOption}>
+              {clinicOption}
+            </option>
+          ))}
+        </Form.Select>
+
+     {/* <Form.Select 
      style={{width:"50%"}}
     
      value={clinic} onChange={(e) => setClinic(e.target.value)}>
@@ -104,7 +119,7 @@ const [url, setUrl] = useState("");
           </option>
         ))}
 
-</Form.Select> 
+</Form.Select>  */}
 <div className='imageUpload'>
 <h4>Upload an image</h4>
 

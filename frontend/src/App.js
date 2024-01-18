@@ -29,13 +29,7 @@ function App() {
       <UserContext.Provider
         value={{ token, setToken, isLoggedIn, setIsLoggedIn }}
       >
-        {/* <Link  to="/home">
-          <img
-          className="logo"
-            src="https://res.cloudinary.com/dvmoaseij/image/upload/v1705318737/logo_kzcqkc.jpg"
-            alt="Logo"
-          />
-        </Link>  */}
+       
         <div className="homeHeader">
           <Link to="/home">
             <img

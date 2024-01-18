@@ -4,7 +4,15 @@ import { useContext } from "react";
 import Form from "react-bootstrap/Form";
 // import "../../src/App.css";
 import { Link, useNavigate } from "react-router-dom";
-import {Button,CloseButton ,Row,Col, Card,  ListGroup,  Modal} from "react-bootstrap";
+import {
+  Button,
+  CloseButton,
+  Row,
+  Col,
+  Card,
+  ListGroup,
+  Modal,
+} from "react-bootstrap";
 import { UserContext } from "../App";
 import axios from "axios";
 
@@ -87,142 +95,154 @@ const Case = () => {
 
   return (
     <div className="about">
-     {showmodal && (
-    <div className="modal show" style={{ display: 'block', position: 'initial' }}>
-      <Modal.Dialog>
-        <Modal.Body>
-          {mesageStatus ? <p>{message}</p>:<p>{errormessage}</p>}
-        </Modal.Body>
+      {showmodal && (
+        <div
+          className="modal show"
+          style={{ display: "block", position: "initial" }}
+        >
+          <Modal.Dialog>
+            <Modal.Body>
+              {mesageStatus ? <p>{message}</p> : <p>{errormessage}</p>}
+            </Modal.Body>
 
-        <Modal.Footer>
-          <Button  className="button" variant="secondary" onClick={() => {setPatientCase(null);
-            setShowModal(false)}}>
-            Close
-          </Button>
-        </Modal.Footer>
-      </Modal.Dialog>
-    </div>
-  )}
-  {bookedAppointments.map((bookAppointment, i) => (
-    <Row>
-      {/* Main Card */}
-      <Col md={6}>
-        <Card style={{ width: "18rem" ,margin:"2rem"}}>
-          <Card.Header>Booked Appointment </Card.Header>
-          <ListGroup variant="flush">
-            <ListGroup.Item>{bookAppointment.patient.name}</ListGroup.Item>
-            <ListGroup.Item>{bookAppointment.schedule.date}</ListGroup.Item>
-            <ListGroup.Item>{bookAppointment.schedule.doctor.name}</ListGroup.Item>
-            <ListGroup.Item>{bookAppointment.schedule.time}</ListGroup.Item>
-          </ListGroup>
-          <Row>
-            <Col>
+            <Modal.Footer>
               <Button
-              className="button-2"
-                variant="primary"
+                className="button"
+                variant="secondary"
                 onClick={() => {
-                  setPatientId(bookAppointment.patient._id);
-                  getpatientHistory(bookAppointment.patient._id);
-                  setshowPatientHistory(bookAppointment._id);
+                  setPatientCase(null);
+                  setShowModal(false);
                 }}
               >
-                get patient history
+                Close
               </Button>
-            </Col>
-            <Col>
-              <Button
-                className="button-2"
-                variant="primary"
-                onClick={() => {
-                  setPatientCase(bookAppointment._id);
-                }}
-              >
-                fill patient Case
-              </Button>
-            </Col>
-          </Row>
-        </Card>
-      </Col>
+            </Modal.Footer>
+          </Modal.Dialog>
+        </div>
+      )}
+      {bookedAppointments.map((bookAppointment, i) => (
+        <Row>
+          {/* Main Card */}
+          <Col md={6}>
+            <Card style={{marginLeft:"5rem"}} >
+              <Card.Header>Booked Appointment </Card.Header>
+              <ListGroup variant="flush">
+                <ListGroup.Item>
+                  patient name: {bookAppointment.patient.name}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  Doctor name:{bookAppointment.schedule.doctor.name}
+                </ListGroup.Item>
+                <ListGroup.Item>
+                  appointment Date:{bookAppointment.schedule.date}
+                </ListGroup.Item>
 
-      {/* Patient History Card */}
-      <Col md={6}>
-        {showPatientHistory === bookAppointment._id && (
-          <>
-            {patientHistory.map((elem, j) => (
-              <Card  style={{ width: "18rem",margin:"2rem"}}>
-                <Card.Header >
+                <ListGroup.Item>
+                  appointment time:{bookAppointment.schedule.time}
+                </ListGroup.Item>
+              </ListGroup>
+              <Row>
+                <Col>
+                  <Button
+                    className="button-2"
+                    variant="primary"
+                    onClick={() => {
+                      setPatientId(bookAppointment.patient._id);
+                      getpatientHistory(bookAppointment.patient._id);
+                      setshowPatientHistory(bookAppointment._id);
+                    }}
+                  >
+                    get patient history
+                  </Button>
+                </Col>
+                <Col>
+                  <Button
+                    className="button-2"
+                    variant="primary"
+                    onClick={() => {
+                      setPatientCase(bookAppointment._id);
+                    }}
+                  >
+                    fill patient Case
+                  </Button>
+                </Col>
+              </Row>
+            </Card>
+          </Col>
 
-                  
-                  
-                  patient History:
-                  <CloseButton 
-                   style={{ float: "right" }}
-                  onClick={()=>{setshowPatientHistory(null)}}/>
-                  
-                  
-                  
-                   </Card.Header>
-                <ListGroup variant="flush">
-                  <ListGroup.Item>Diagnosis: {elem.diagnosis}</ListGroup.Item>
-                  <ListGroup.Item>Treatment: {elem.treatmet}</ListGroup.Item>
-                </ListGroup>
-              </Card>
-            ))}
-          </>
-        )}
-      </Col>
+          {/* Patient History Card */}
+          <Col md={6}>
+            {showPatientHistory === bookAppointment._id && (
+              <>
+                {patientHistory.map((elem, j) => (
+                  <Card style={{width:"16rem", marginLeft:"4rem"}}>
+                    <Card.Header>
+                      patient History:
+                      <CloseButton
+                        style={{ float: "right" }}
+                        onClick={() => {
+                          setshowPatientHistory(null);
+                        }}
+                      />
+                    </Card.Header>
+                    <ListGroup variant="flush">
+                      <ListGroup.Item>
+                        Diagnosis: {elem.diagnosis}
+                      </ListGroup.Item>
+                      <ListGroup.Item>
+                        Treatment: {elem.treatment}
+                      </ListGroup.Item>
+                    </ListGroup>
+                  </Card>
+                ))}
+              </>
+            )}
+          </Col>
 
-      {/* Patient Case Card */}
-      {patientCase === bookAppointment._id && (
-        <Col md={12} className="mt-3">
-          <Card style={{ width: "30rem",margin:"2rem" }}>
-            <Card.Header>Add Patient Case</Card.Header>
-            <Card.Body>
-              
-              <Form>
-                        <Form.Group as={Row} className="mb-3">
-                         
-                          <Col sm={15}>
-                            <Form.Control
-                               className="addReview"
-                               as="textarea"
-                               rows={4}
+          {/* Patient Case Card */}
+          {patientCase === bookAppointment._id && (
+            <Col md={12} className="mt-3">
+              <Card style={{ width: "25rem", marginLeft:"5rem" }}>
+                <Card.Header>Add Patient Case</Card.Header>
+                <Card.Body>
+                  <Form>
+                    <Form.Group as={Row} className="mb-3">
+                      <Col sm={15}>
+                        <Form.Control
+                          className="addReview"
+                          as="textarea"
+                          rows={4}
+                          placeholder="The diagnosis..."
+                          onChange={(e) => {
+                            setDiagnosis(e.target.value);
+                            // console.log(diagnosis);
+                          }}
+                        />
+                      </Col>
+                    </Form.Group>
 
-
-
-                              placeholder="The diagnosis..."
-                              onChange={(e) => {
-                                setDiagnosis(e.target.value);
-                                // console.log(diagnosis);
-                              }}
-                            />
-                          </Col>
-                        </Form.Group>
-
-                        <Form.Group
-                          as={Row}
-                          className="mb-3"
-                          controlId="formHorizontalPassword"
-                        >
-                          
-                          <Col sm={15}>
-                            <Form.Control
-                               className="addReview"
-                               as="textarea"
-                               rows={4}
-                              placeholder="Treatment..."
-                              onChange={(e) => {
-                                setTreatment(e.target.value);
-                                
-                              }}
-                            />
-                          </Col>
-                        </Form.Group>
-                        <Row>
-<Col>
+                    <Form.Group
+                      as={Row}
+                      className="mb-3"
+                      controlId="formHorizontalPassword"
+                    >
+                      <Col sm={15}>
+                        <Form.Control
+                          className="addReview"
+                          as="textarea"
+                          rows={4}
+                          placeholder="Treatment..."
+                          onChange={(e) => {
+                            setTreatment(e.target.value);
+                          }}
+                        />
+                      </Col>
+                    </Form.Group>
+                    <Row >
+                      <Col>
                         <Button
                           className="button-2"
-                          variant="primary"
+                           variant="primary"
                           onClick={() => {
                             //setPatientId(bookAppointment.patient._id);
                             handlePatientCase(bookAppointment.patient._id);
@@ -231,39 +251,29 @@ const Case = () => {
                         >
                           Add to Patient History
                         </Button>
+                      </Col>
 
-                        </Col>
-
-                        <Col>
+                      <Col>
                         <Button
-                        style={{height:"100%"}}
-                        onClick={()=>{
-                          setPatientCase(null)
-                       
-                        }}
-                      className="button-2"
-                        
-                        >Close</Button>
-                        
-                        
-                        
-                        
-                        </Col>
-                        </Row>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      )}
-    </Row>
-  ))}
-
-
+                          style={{ height: "100%" }}
+                          onClick={() => {
+                            setPatientCase(null);
+                          }}
+                          className="button-2"
+                        >
+                          Close
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form>
+                </Card.Body>
+              </Card>
+            </Col>
+          )}
+        </Row>
+      ))}
     </div>
   );
 };
 
 export default Case;
-
-
-
